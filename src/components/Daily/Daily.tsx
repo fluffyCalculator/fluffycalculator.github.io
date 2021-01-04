@@ -18,7 +18,7 @@ function Daily() {
   // console.log(dailies);
   return (
     <div className="flex justify-center">
-      <div className="grid grid-cols-7 gap-4 my-10">
+      <div className="grid gap-4 grid-cols-7 my-10">
         {days.map((x, idx) => {
           return <WeekBox key={idx} text={x}></WeekBox>;
         })}

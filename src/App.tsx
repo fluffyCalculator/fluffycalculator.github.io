@@ -10,28 +10,28 @@ function App() {
 
   return (
     <Router>
-        <main
-          className={clsx(
-            lightTheme ? "light-theme" : "dark-theme",
-            "bg-primary text-primary w-full"
-          )}
-        >
-          <NavBar />
-          <Switch>
-            <Route path="/fluffy"> daily fisher </Route>
-            <Route path="/(daily|)">
-              {" "}
-              <Daily />{" "}
-            </Route>
-          </Switch>
+      <main
+        className={clsx(
+          lightTheme ? "light-theme" : "dark-theme",
+          "w-full text-primary bg-primary"
+        )}
+      >
+        <NavBar />
+        <Switch>
+          <Route path="/fluffy"> daily fisher </Route>
+          <Route path="/(daily|)">
+            {" "}
+            <Daily />{" "}
+          </Route>
+        </Switch>
 
-          <div
-            className="absolute top-0 right-0 m-3 p-3 text-primary bg-secondary border border-green-400 border-solid cursor-pointer select-none shadow-xl"
-            onClick={() => setLightTheme(!lightTheme)}
-          >
-            Swap Theme
-          </div>
-        </main>
+        <div
+          className="absolute right-0 top-0 m-3 p-3 text-primary bg-secondary border border-solid border-green-400 shadow-xl cursor-pointer select-none"
+          onClick={() => setLightTheme(!lightTheme)}
+        >
+          Swap Theme
+        </div>
+      </main>
     </Router>
   );
 }

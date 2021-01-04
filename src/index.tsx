@@ -7,8 +7,8 @@ import DailyProvider from "./components/Daily/Context";
 ReactDOM.render(
   <React.StrictMode>
     <DailyProvider>
-    <App />
- </DailyProvider>
+      <App />
+    </DailyProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -6,7 +6,13 @@ const TITLES = { "/fluffy": "Fluffy Calculator", "/daily": "Daily Seeker" };
 
 function Tab({ location, current }: { location: string; current: boolean }) {
   return (
-    <Link to={location} className={clsx(current && "text-prpl border-b-2 border-prpl", "p-3 pb-1 inline-block text-base font-extrabold")}>
+    <Link
+      to={location}
+      className={clsx(
+        current && "text-prpl border-b-2 border-prpl",
+        "inline-block p-3 pb-1 text-base font-extrabold"
+      )}
+    >
       {TITLES[location]}
     </Link>
   );
