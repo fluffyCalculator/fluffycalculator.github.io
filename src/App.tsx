@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import clsx from "clsx";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import DailyProvider from "./components/Daily/Context";
+import Daily from "./components/Daily/Daily";
+import NavBar from "./components/NavBar";
 
 function App() {
+  const [lightTheme, setLightTheme] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Router>
+        <main
+          className={clsx(
+            lightTheme ? "light-theme" : "dark-theme",
+            "bg-primary text-primary w-full"
+          )}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <NavBar />
+          <Switch>
+            <Route path="/fluffy"> daily fisher </Route>
+            <Route path="/(daily|)">
+              {" "}
+              <Daily />{" "}
+            </Route>
+          </Switch>
+
+          <div
+            className="absolute top-0 right-0 m-3 p-3 text-primary bg-secondary border border-green-400 border-solid cursor-pointer select-none shadow-xl"
+            onClick={() => setLightTheme(!lightTheme)}
+          >
+            Swap Theme
+          </div>
+        </main>
+    </Router>
   );
 }
 
