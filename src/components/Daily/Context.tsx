@@ -20,6 +20,7 @@ const DailyProvider = ({ children }) => {
       console.log("couldnt update dailies wtf!!!");
       return;
     }
+    console.log("i did update dailies");
     setDailies(updateDailies);
   };
 

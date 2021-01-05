@@ -15,10 +15,10 @@ const days = [
 function Daily() {
   const { dailies } = useContext(DailyContext);
 
-  // console.log(dailies);
+  console.log("rendered dailies");
   return (
     <div className="flex justify-center">
-      <div className="grid gap-4 grid-cols-7 my-10">
+      <div className="grid gap-2 grid-cols-7 my-10">
         {days.map((x, idx) => {
           return <WeekBox key={idx} text={x}></WeekBox>;
         })}

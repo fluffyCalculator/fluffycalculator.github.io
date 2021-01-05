@@ -1,33 +1,36 @@
 import clsx from "clsx";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import DailyProvider from "./components/Daily/Context";
 import Daily from "./components/Daily/Daily";
 import NavBar from "./components/NavBar";
 
 function App() {
-  const [lightTheme, setLightTheme] = useState(false);
+  const ref = useRef(null);
 
   return (
     <Router>
-      <main
-        className={clsx(
-          lightTheme ? "light-theme" : "dark-theme",
-          "w-full text-primary bg-primary"
-        )}
-      >
+      <main className="light-theme w-full text-primary bg-primary" ref={ref}>
         <NavBar />
         <Switch>
           <Route path="/fluffy"> daily fisher </Route>
           <Route path="/(daily|)">
-            {" "}
-            <Daily />{" "}
+            <Daily />
           </Route>
         </Switch>
 
         <div
-          className="absolute right-0 top-0 m-3 p-3 text-primary bg-secondary border border-solid border-green-400 shadow-xl cursor-pointer select-none"
-          onClick={() => setLightTheme(!lightTheme)}
+          className="absolute right-0 top-0 m-1 p-1 text-primary bg-secondary border border-solid border-green-400 shadow-xl cursor-pointer select-none"
+          onClick={() => {
+            console.log(ref);
+            if (ref.current.classList.contains("light-theme")) {
+              ref.current.classList.add("dark-theme");
+              ref.current.classList.remove("light-theme");
+            } else {
+              ref.current.classList.add("light-theme");
+              ref.current.classList.remove("dark-theme");
+            }
+          }}
         >
           Swap Theme
         </div>

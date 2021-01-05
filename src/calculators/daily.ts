@@ -260,7 +260,7 @@ function getDailyChallenge(add: number) {
     }
   }
   dailyObject.seed = Number(dateSeed);
-  console.log(dailyObject);
+  // console.log(dailyObject);
   return dailyObject;
 }
 
