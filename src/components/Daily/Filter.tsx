@@ -1,5 +1,7 @@
 import clsx from "clsx";
 import React, { useContext, useState } from "react";
+import Button from "../utils/Button";
+import Input from "../utils/Input";
 import { DailyContext } from "./Context";
 
 export var filterTypes = {
@@ -65,6 +67,7 @@ function FilterBox({ type }: { type: string }) {
 }
 
 function Filter() {
+  
   const [showFilter, setShowFilter] = useState(false);
   const { updateDailiesFiltered } = useContext(DailyContext);
 
@@ -73,14 +76,17 @@ function Filter() {
 
   return (
     <>
-      <div
-        className="mb-2 mt-10 p-2 text-base bg-secondary border border-solid border-prpl rounded shadow cursor-pointer select-none"
-        onClick={() => setShowFilter(!showFilter)}
+      <Button
+        className="my-2"
+        onClick={() => {
+          setShowFilter(!showFilter);
+        }}
       >
         Filter
-      </div>
+      </Button>
+
       {showFilter && (
-        <div className="mb-10 w-11/12 text-center sm:w-9/12 md:w-3/4 lg:w-5/12">
+        <div className="w-11/12 text-center sm:w-9/12 md:w-3/4 lg:w-5/12">
           <div className="flex flex-wrap justify-center">
             {Object.keys(filterTypes)
               .filter(
@@ -92,9 +98,9 @@ function Filter() {
                 return <FilterBox key={idx} type={type} />;
               })}
           </div>
-          <div className="flex justify-evenly mt-2">
-            <div
-              className="p-2 bg-secondary border border-solid border-prpl rounded cursor-pointer select-none"
+          <div className="flex justify-center mt-2">
+            <Button
+              className="mr-2"
               onClick={() => {
                 for (var type in filterTypes) {
                   filterTypes[type] = !filterTypes[type];
@@ -106,19 +112,19 @@ function Filter() {
               }}
             >
               Flip All
-            </div>
-            <label>
-              Match Atleast
-              <input
-                type="number"
-                onChange={(e) => {
-                  toMatch = Number(e.target.value);
-                  updateDailiesFiltered();
-                }}
-                defaultValue={toMatch}
-                className="p-2 bg-secondary border border-solid border-prpl rounded"
-              />
-            </label>
+            </Button>
+
+            <Input
+              label="Match Atleast"
+              type="number"
+              onChange={(e) => {
+                toMatch = Number(e.target.value);
+                updateDailiesFiltered();
+              }}
+              className="w-24"
+              parentClassName="ml-2"
+              defaultValue={toMatch}
+            ></Input>
           </div>
         </div>
       )}

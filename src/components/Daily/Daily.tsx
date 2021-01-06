@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { DailyContext } from "./Context";
 import Box, { WeekBox } from "./Box";
 import Filter from "./Filter";
-import clsx from "clsx";
 import UniverseSwitch from "./UniverseSwitch";
 
 const days = [
@@ -24,7 +23,7 @@ function Daily() {
       <UniverseSwitch />
 
       <Filter />
-      <div className="grid gap-2 grid-cols-7 my-10">
+      <div className="grid gap-2 grid-cols-7 mt-3">
         {days.map((x, idx) => {
           return <WeekBox key={idx} text={x} />;
         })}

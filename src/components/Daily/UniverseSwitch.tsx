@@ -24,7 +24,7 @@ function UniverseSwitch() {
           window.daily_universe === 1
             ? "bg-blue-500 text-white"
             : "bg-secondary text-primary",
-          "p-2 border border-solid border-prpl rounded rounded-r-none cursor-pointer select-none"
+          "p-2 border border-solid border-prpl rounded rounded-r-none cursor-pointer select-none text-xs sm:text-base"
         )}
         onClick={handleClick}
         title="1"
@@ -36,7 +36,7 @@ function UniverseSwitch() {
           window.daily_universe === 2
             ? "bg-pink-500 text-white"
             : "bg-secondary text-primary",
-          "p-2 border border-solid border-prpl rounded rounded-l-none cursor-pointer select-none"
+          "p-2 border border-solid border-prpl rounded rounded-l-none cursor-pointer select-none text-xs sm:text-base"
         )}
         onClick={handleClick}
         title="2"

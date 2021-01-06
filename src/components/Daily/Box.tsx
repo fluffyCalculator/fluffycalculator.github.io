@@ -64,7 +64,7 @@ function Box({ object }: Props) {
       </div>
 
       {expanded && (
-        <span className="w-de sm:w-deSM md:w-deMD col-span-7 justify-self-center p-2 bg-secondary border border-solid border-prpl rounded">
+        <span className="col-span-7 justify-self-center p-2 w-de bg-secondary border border-solid border-prpl rounded sm:w-deSM md:w-deMD">
           <p className="whitespace-pre-wrap text-xxxs sm:text-xs md:text-base">
             {date + "\n"}
             {Object.keys(mods).map((x, i) => {
