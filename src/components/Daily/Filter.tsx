@@ -178,7 +178,7 @@ function Filter() {
   return (
     <>
       <div
-        className="mt-10 mb-2 p-2 text-base bg-secondary border border-solid border-prpl rounded shadow-md cursor-pointer select-none"
+        className="mt-10 mb-2 p-2 text-base bg-secondary border border-solid border-prpl rounded shadow cursor-pointer select-none"
         onClick={() => setShowFilter(!showFilter)}
       >
         Filter

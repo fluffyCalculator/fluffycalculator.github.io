@@ -26,7 +26,7 @@ function NavBar() {
   document.title = TITLES[currentLocation] || "Fluffy Calculator";
 
   return (
-    <div className="width-full text-center bg-thirdary shadow-2xl">
+    <div className="width-full text-center bg-thirdary shadow-md">
       <Tab location="/fluffy" current={currentLocation === "/fluffy"} />
       <Tab location="/daily" current={currentLocation === "/daily"} />
     </div>
