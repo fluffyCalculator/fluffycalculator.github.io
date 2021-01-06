@@ -33,9 +33,9 @@ function Box({ object }: Props) {
   const [expanded, setExpanded] = useState(false);
 
   const { value, date, next, preview, tier, seed, mods } = object;
-  
+
   if (value === undefined) return <div className={baseBox}></div>;
-  
+
   return (
     <>
       <div

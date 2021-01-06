@@ -34,8 +34,7 @@ module.exports = {
         de: "19.25rem",
         deSM: "28rem",
         deMD: "42rem",
-
-      }
+      },
     },
   },
   variants: {
@@ -48,4 +47,3 @@ module.exports = {
 // 2.75 -> 19.25
 // 4 -> 28
 // 6 -> 42
-

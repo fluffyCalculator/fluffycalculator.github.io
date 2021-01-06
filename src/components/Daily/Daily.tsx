@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { DailyContext } from "./Context";
 import Box, { WeekBox } from "./Box";
 import Filter from "./Filter";
+import clsx from "clsx";
+import UniverseSwitch from "./UniverseSwitch";
 
 const days = [
   "Sunday",
@@ -19,6 +21,8 @@ function Daily() {
   console.log("rendered dailies");
   return (
     <div className="flex flex-col flex-wrap items-center">
+      <UniverseSwitch />
+
       <Filter />
       <div className="grid gap-2 grid-cols-7 my-10">
         {days.map((x, idx) => {
