@@ -142,3 +142,86 @@ export var toMatch = 2;
 //     </>
 //   );
 // }
+
+function FilterBox({ type }: { type: string }) {
+  const { updateDailiesFiltered } = useContext(DailyContext);
+  const [enabled, setEnabled] = useState(filterTypes[type]);
+
+  return (
+    <>
+      <div
+        className={clsx(
+          filterTypes[type] ? "bg-tier3" : "bg-tier1",
+          "m-0.5 p-1 w-min text-black text-sm cursor-pointer select-none"
+        )}
+        onClick={() => {
+          filterTypes[type] = !filterTypes[type];
+
+          updateDailiesFiltered();
+
+          setEnabled(!enabled);
+        }}
+      >
+        {type}
+      </div>
+    </>
+  );
+}
+
+function Filter() {
+  const [showFilter, setShowFilter] = useState(true);
+  const { updateDailiesFiltered } = useContext(DailyContext);
+
+  // Specifically for forcing component to rerender when updating filter types.
+  const [flipAll, setFlipAll] = useState(false);
+
+  return (
+    <>
+      <div
+        className="mt-10 mb-2 p-2 text-base bg-secondary border border-solid border-prpl rounded shadow-md cursor-pointer select-none"
+        onClick={() => setShowFilter(!showFilter)}
+      >
+        Filter
+      </div>
+      {showFilter && (
+        <div className="mb-10 md:w-1/2 text-center w-9/12">
+          <div className="flex flex-wrap justify-center">
+            {Object.keys(filterTypes).map((type, idx) => {
+              return <FilterBox key={idx} type={type} />;
+            })}
+          </div>
+          <div className="flex justify-evenly mt-2">
+            <div
+              className="p-2 bg-secondary border border-solid border-prpl rounded cursor-pointer select-none"
+              onClick={() => {
+                for (var type in filterTypes) {
+                  filterTypes[type] = !filterTypes[type];
+                }
+
+                setFlipAll(!flipAll);
+
+                updateDailiesFiltered(true);
+              }}
+            >
+              Flip All
+            </div>
+            <label>
+              Match Atleast
+              <input
+                type="number"
+                onChange={(e) => {
+                  toMatch = Number(e.target.value);
+                  updateDailiesFiltered(true);
+                }}
+                defaultValue={toMatch}
+                className="p-2 bg-secondary border border-solid border-prpl rounded"
+              />
+            </label>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default Filter;

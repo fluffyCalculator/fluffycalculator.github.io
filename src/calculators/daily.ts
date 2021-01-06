@@ -67,16 +67,18 @@ export function makeDaily(times): Partial<DailyType>[] {
   for (var x = lastWeek; x < times; x++) {
     let dailyObj = getDailyChallenge(x);
     let seed = dailyObj.seed;
+    delete dailyObj["seed"];
     let dailyValue = getDailyHeliumValueDaily(countDailyWeightDaily(dailyObj));
     if (x < blank) {
       returnable.push({});
       continue;
     }
+    // console.log(dailyObj);
     returnable.push({
       value: dailyValue,
       date: getPrettyTimeString(x),
       next: x === 1 ? true : false,
-      mods: dailyObj.mods,
+      mods: dailyObj,
       preview: Object.keys(dailyObj).reduce((prev, curr) => {
         if (curr === "seed") return prev;
         if (mods.hasOwnProperty(curr)) {
@@ -151,7 +153,21 @@ function everythingInArrayGreaterEqual(smaller, bigger) {
 
 type DailyMods = {
   seed: number;
-  mods: object;
+  empower?: object;
+  explosive?: object;
+  toxic?: object;
+  pressure?: object;
+  plague?: object;
+  bogged?: object;
+  trimpCritChanceUp?: object;
+  trimpCritChanceDown?: object;
+  weakness?: object;
+  minDamage?: object;
+  maxDamage?: object;
+  badHealth?: object;
+  rampage?: object;
+  karma?: object;
+  hemmorrhage?: object;
 };
 
 function getDailyChallenge(add: number) {

@@ -1,7 +1,5 @@
-import clsx from "clsx";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import DailyProvider from "./components/Daily/Context";
 import Daily from "./components/Daily/Daily";
 import NavBar from "./components/NavBar";
 
