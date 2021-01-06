@@ -152,7 +152,7 @@ function FilterBox({ type }: { type: string }) {
       <div
         className={clsx(
           filterTypes[type] ? "bg-tier3" : "bg-tier1",
-          "m-0.5 p-1 w-min text-black text-sm cursor-pointer select-none"
+          "m-0.5 p-1 w-min text-black text-xxs shadow cursor-pointer select-none sm:text-xs md:text-sm"
         )}
         onClick={() => {
           filterTypes[type] = !filterTypes[type];
@@ -178,13 +178,13 @@ function Filter() {
   return (
     <>
       <div
-        className="mt-10 mb-2 p-2 text-base bg-secondary border border-solid border-prpl rounded shadow cursor-pointer select-none"
+        className="mb-2 mt-10 p-2 text-base bg-secondary border border-solid border-prpl rounded shadow cursor-pointer select-none"
         onClick={() => setShowFilter(!showFilter)}
       >
         Filter
       </div>
       {showFilter && (
-        <div className="mb-10 md:w-1/2 text-center w-9/12">
+        <div className="mb-10 w-11/12 text-center sm:w-9/12 md:w-3/4 lg:w-5/12">
           <div className="flex flex-wrap justify-center">
             {Object.keys(filterTypes).map((type, idx) => {
               return <FilterBox key={idx} type={type} />;
@@ -200,7 +200,7 @@ function Filter() {
 
                 setFlipAll(!flipAll);
 
-                updateDailiesFiltered(true);
+                updateDailiesFiltered();
               }}
             >
               Flip All
@@ -211,7 +211,7 @@ function Filter() {
                 type="number"
                 onChange={(e) => {
                   toMatch = Number(e.target.value);
-                  updateDailiesFiltered(true);
+                  updateDailiesFiltered();
                 }}
                 defaultValue={toMatch}
                 className="p-2 bg-secondary border border-solid border-prpl rounded"

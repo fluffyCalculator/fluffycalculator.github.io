@@ -24,9 +24,8 @@ const DailyProvider = ({ children }) => {
     setDailies(updateDailies);
   };
 
-  const updateDailiesFiltered = (force?: boolean) => {
+  const updateDailiesFiltered = () => {
     const goodMods = Object.keys(filterTypes).filter((x) => filterTypes[x]);
-    if (!force && goodMods.length === Object.keys(filterTypes).length) return;
     for (var x = 0; x < dailies.length; x++) {
       if (Object.keys(dailies[x]).length === 0) continue;
 

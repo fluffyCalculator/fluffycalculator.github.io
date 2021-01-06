@@ -30,6 +30,12 @@ module.exports = {
         xxxs: "0.5rem",
         xxs: "0.6rem",
       },
+      spacing: {
+        de: "19.25rem",
+        deSM: "28rem",
+        deMD: "42rem",
+
+      }
     },
   },
   variants: {
@@ -37,3 +43,9 @@ module.exports = {
   },
   plugins: [],
 };
+
+// w-11 h-11 sm:h-16 sm:w-16 md:w-24 md:h-24
+// 2.75 -> 19.25
+// 4 -> 28
+// 6 -> 42
+
