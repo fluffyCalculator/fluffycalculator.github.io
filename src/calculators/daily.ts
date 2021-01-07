@@ -151,7 +151,7 @@ function everythingInArrayGreaterEqual(smaller, bigger) {
   return true;
 }
 
-type DailyMods = {
+export type DailyMods = {
   seed: number;
   empower?: object;
   explosive?: object;

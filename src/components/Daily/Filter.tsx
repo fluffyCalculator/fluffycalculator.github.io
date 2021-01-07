@@ -121,8 +121,7 @@ function Filter() {
                 toMatch = Number(e.target.value);
                 updateDailiesFiltered();
               }}
-              className="w-24"
-              parentClassName="ml-2"
+              parentClassName="ml-2 w-24"
               defaultValue={toMatch}
             ></Input>
           </div>
