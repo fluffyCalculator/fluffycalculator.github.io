@@ -36,6 +36,7 @@
 import React, { useRef, useState } from "react";
 import { fluffyInstance, handle_paste } from "../../calculators/fluffy";
 import Button from "../utils/Button";
+import Input from "../utils/Input";
 import InputSection from "./InputSection";
 
 // This keeps all update props.
@@ -100,25 +101,6 @@ function Template({
       <div className="grid gap-4 grid-cols-10 content-center py-10 border-b-2 border-solid border-prpl">
         <div className="flex flex-wrap col-span-2 col-start-2 justify-center">
           <MemoSaveBox onPaste={getPaste} save={instance.string ?? null} />
-
-          {/* <textarea
-            className="mb-4 p-3 w-full text-xl bg-secondary border border-solid border-prpl rounded outline-none shadow-md resize-none"
-            onPaste={getPaste}
-            ref={textRef}
-            placeholder="Paste your save..."
-            // defaultValue={instance?.string}
-            />
-            {instance.string  && (
-              <Button
-                variant="retrieve"
-                className="col-span-2 self-center mb-4"
-                onClick={() => {
-                  textRef.current.innerText = instance?.string;
-                }}
-              >
-                Retrieve save
-              </Button>
-            )} */}
           <InputSection index={index} instance={instance} update={update} />
         </div>
 
@@ -126,7 +108,17 @@ function Template({
           This is where the table will be
         </div>
 
-        <div className="col-span-2 col-start-8 text-center">Extra Stats</div>
+        <div className="col-span-2 col-start-8 text-center">
+          <div>Extra Stats</div>
+          {instance?.displayData?.xpPerRun > 0 && (
+            <Input
+              label="XP Per Run"
+              defaultValue={addCommas(instance?.displayData?.xpPerRun)}
+              disabled={true}
+              className="bg-thirdary"
+            />
+          )}
+        </div>
       </div>
     </>
   );
@@ -135,3 +127,7 @@ function Template({
 export default React.memo(Template, (prevProps, nextProps) => {
   return prevProps.index === nextProps.index;
 });
+
+function addCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

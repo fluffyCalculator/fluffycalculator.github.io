@@ -12,6 +12,7 @@ interface Props {
   min?: number;
   max?: number;
   variant?: "fluffy";
+  disabled?: true;
 }
 
 const Input = ({
@@ -25,6 +26,7 @@ const Input = ({
   min,
   max,
   variant,
+  disabled,
 }: Props) => {
   console.log("rendered input");
 
@@ -41,6 +43,7 @@ const Input = ({
           defaultValue={defaultValue}
           min={variant === "fluffy" ? (min ? min : 0) : null}
           max={max}
+          disabled={disabled ?? null}
           className={clsx(
             className,
             "block p-1 pl-2 w-full text-xs bg-secondary border border-solid border-prpl rounded focus:outline-none sm:text-base"

@@ -77,6 +77,10 @@ export class fluffyInstance {
     lastRadonPortal: 0, // game.global.lastRadonPortal
   };
 
+  displayData = {
+    xpPerRun: 0,
+  };
+
   getLevel = (evolution, exp) => {
     return Math.floor(
       Math.log((exp / this.getFirstLevel(evolution)) * (growth - 1) + 1) /
@@ -95,11 +99,6 @@ export class fluffyInstance {
         Math.pow(prestigeExpModifier, evolution) *
         ((Math.pow(growth, level) - 1) / (growth - 1))
     );
-    // return Math.floor(
-    //   firstLevel *
-    //     Math.pow(prestigeExpModifier, evolution) *
-    //     ((Math.pow(growth, level) - 1) / (growth - 1))
-    // );
   };
 
   getExpBonus = () => {
@@ -176,6 +175,76 @@ export class fluffyInstance {
     }
   };
 
+  getMinZoneForExp = () => {
+    if (this.universe === 1) {
+      var zone = 301;
+      if (this.portal.Classy.level) zone -= this.portal.Classy.level * 3;
+      return Math.floor(zone);
+    } else {
+      return 0;
+    }
+  };
+
+  xpFromZone = (start: number, end: number) => {
+    const minimumZone = this.getMinZoneForExp();
+    // If ending before you're actually allowed to get xp then return nothing.
+    let mcalc1: number, mcalc2: number;
+
+    if (end < minimumZone) {
+      return 0;
+    }
+    // If starting before you're allowed to get xp, set start to min zone.
+    if (start < minimumZone) {
+      start = minimumZone;
+    }
+
+    if (this.universe === 1) {
+      mcalc1 = (Math.pow(expGrowth, end - minimumZone) - 1) / (expGrowth - 1);
+      mcalc2 =
+        (50 + this.portal.Curious.level * 60) *
+        (1 + this.portal.Cunning.level * 0.25) *
+        this.expBonus;
+    } else {
+      mcalc1 =
+        (Math.pow(Math.pow(expGrowth, 3), end) - 1) /
+        (Math.pow(expGrowth, 3) - 1);
+      mcalc2 = 2.5 * this.expBonus;
+    }
+
+    let addSpireBonus = 0;
+
+    if (this.universe === 1 && this.spiresCompleted.length > 0) {
+      const spiresCompletedZones = this.spiresCompleted.map(
+        (spireNumber) => (spireNumber + 1) * 100
+      );
+
+      console.log("spiresCompletedZones", spiresCompletedZones);
+
+      addSpireBonus = spiresCompletedZones.reduce((total, zone) => {
+        if (start < zone && end > zone) return total + this.spireXP(zone);
+
+        return total;
+      }, 0);
+    }
+
+    // Minus all of the previous zone xp.
+    if (start > minimumZone) {
+      return (
+        mcalc1 * mcalc2 + addSpireBonus - this.xpFromZone(minimumZone, start)
+      );
+    } else {
+      return mcalc1 * mcalc2 + addSpireBonus;
+    }
+  };
+
+  spireXP = (zone: number) => {
+    var reward =
+      (50 + this.portal.Curious.level * 60) *
+      Math.pow(expGrowth, zone - this.getMinZoneForExp() - 1) *
+      (1 + this.portal.Cunning.level * 0.25);
+    return reward * this.expBonus * expGrowth;
+  };
+
   getHeirloomValue = (
     bonus: number,
     universe: number,
@@ -196,12 +265,11 @@ export class fluffyInstance {
     }
   };
 
-  growth = 4;
-  expGrowth = 1.015;
-  baseExp = 50;
-  prestigeExpModifier = 5;
-  baseFirstLevel = 1000;
-  maxEvolution = ["filler", 10, 1];
+  updateDisplayData = () => {
+    this.displayData = {
+      xpPerRun: Math.round(this.xpFromZone(0, this.zoneYouPortal)),
+    };
+  };
 
   pasteSaveActions = (gameSave: GameObject) => {
     this.save = {
@@ -253,17 +321,9 @@ export class fluffyInstance {
 
     this.expBonus = this.getExpBonus();
 
-    console.log(this);
-  };
+    this.updateDisplayData();
 
-  getMinZoneForExp = () => {
-    if (this.universe === 1) {
-      var zone = 301;
-      if (this.portal.Classy.level) zone -= this.portal.Classy.level * 3;
-      return Math.floor(zone);
-    } else {
-      return 0;
-    }
+    console.log(this);
   };
 }
 
