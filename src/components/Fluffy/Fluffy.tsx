@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext, useState } from "react";
+import React, { useContext } from "react";
 import { FluffyContext } from "./Context";
 import Template from "./Template";
 

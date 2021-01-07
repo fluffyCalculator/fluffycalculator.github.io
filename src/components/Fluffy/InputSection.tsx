@@ -1,9 +1,7 @@
-import React, { useContext, useState } from "react";
-import { fluffyInstance, handle_paste } from "../../calculators/fluffy";
-import { GameObject } from "../../calculators/GameObject";
+import React from "react";
+import { fluffyInstance } from "../../calculators/fluffy";
 import Button from "../utils/Button";
 import Input from "../utils/Input";
-import { FluffyContext } from "./Context";
 
 interface Props {
   index: number;

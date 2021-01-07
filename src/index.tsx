@@ -8,9 +8,9 @@ import FluffyProvider from "./components/Fluffy/Context";
 ReactDOM.render(
   <React.StrictMode>
     <DailyProvider>
-    <FluffyProvider>
-      <App />
-    </FluffyProvider>
+      <FluffyProvider>
+        <App />
+      </FluffyProvider>
     </DailyProvider>
   </React.StrictMode>,
   document.getElementById("root")

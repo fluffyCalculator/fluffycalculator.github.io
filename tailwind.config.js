@@ -8,7 +8,7 @@ module.exports = {
         tier1: "#DD7E6B",
         tier2: "#AFCB77",
         tier3: "#62BD87",
-        bgthirdary:  "var(--color-bg-thirdary)",
+        bgthirdary: "var(--color-bg-thirdary)",
       },
       backgroundColor: {
         primary: "var(--color-bg-primary)",

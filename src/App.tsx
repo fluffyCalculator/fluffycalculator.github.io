@@ -1,5 +1,4 @@
-import clsx from "clsx";
-import React, { useRef } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Daily from "./components/Daily/Daily";
 import Fluffy from "./components/Fluffy/Fluffy";

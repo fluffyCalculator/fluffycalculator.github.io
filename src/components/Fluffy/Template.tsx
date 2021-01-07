@@ -33,12 +33,9 @@
 //   );
 // }
 
-import React, { ReactElement, useContext, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { fluffyInstance, handle_paste } from "../../calculators/fluffy";
-import { GameObject } from "../../calculators/GameObject";
 import Button from "../utils/Button";
-import Input from "../utils/Input";
-import { FluffyContext } from "./Context";
 import InputSection from "./InputSection";
 
 // This keeps all update props.
@@ -48,18 +45,18 @@ function SaveBox({ onPaste, save }: { onPaste: (e) => void; save?: string }) {
   const textRef = useRef(null);
   return (
     <>
-        {save && show && (
-          <Button
-            variant="retrieve"
-            className="col-span-2 self-center mb-4"
-            onClick={() => {
-              textRef.current.innerText = save;
-              setShow(!show);
-            }}
-          >
-            Retrieve save
-          </Button>
-        )}
+      {save && show && (
+        <Button
+          variant="retrieve"
+          className="col-span-2 self-center mb-4"
+          onClick={() => {
+            textRef.current.innerText = save;
+            setShow(!show);
+          }}
+        >
+          Retrieve save
+        </Button>
+      )}
       <textarea
         className="mb-4 p-2 w-full text-xl bg-secondary border border-solid border-prpl rounded outline-none shadow-md resize-none"
         onPaste={onPaste}

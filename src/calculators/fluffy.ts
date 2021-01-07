@@ -259,14 +259,12 @@ export class fluffyInstance {
   getMinZoneForExp = () => {
     if (this.universe === 1) {
       var zone = 301;
-      if (this.portal.Classy.level) zone -= (this.portal.Classy.level * 3);
+      if (this.portal.Classy.level) zone -= this.portal.Classy.level * 3;
       return Math.floor(zone);
     } else {
       return 0;
     }
-  }
-
-
+  };
 }
 
 // const test = pasteSaveActions(testSave1);

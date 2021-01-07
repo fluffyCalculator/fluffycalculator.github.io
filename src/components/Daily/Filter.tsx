@@ -67,7 +67,6 @@ function FilterBox({ type }: { type: string }) {
 }
 
 function Filter() {
-  
   const [showFilter, setShowFilter] = useState(false);
   const { updateDailiesFiltered } = useContext(DailyContext);
 
