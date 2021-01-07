@@ -33,6 +33,7 @@
 //   );
 // }
 
+import clsx from "clsx";
 import React, { useRef, useState } from "react";
 import { fluffyInstance, handle_paste } from "../../calculators/fluffy";
 import Button from "../utils/Button";
@@ -59,7 +60,7 @@ function SaveBox({ onPaste, save }: { onPaste: (e) => void; save?: string }) {
         </Button>
       )}
       <textarea
-        className="mb-4 p-2 w-full text-xl bg-secondary border border-solid border-prpl rounded outline-none shadow-md resize-none"
+        className="p-2 w-full text-xl bg-secondary border border-solid border-prpl rounded outline-none shadow-md resize-none"
         onPaste={onPaste}
         ref={textRef}
         placeholder="Paste your save..."
@@ -80,6 +81,7 @@ function Template({
   index: number;
   instance: fluffyInstance;
 }) {
+  console.log("instance", instance);
   const [update, setUpdate] = useState(true);
 
   const instantUpdating = instance.instantUpdating;
@@ -98,27 +100,45 @@ function Template({
 
   return (
     <>
-      <div className="grid gap-4 grid-cols-10 content-center py-10 border-b-2 border-solid border-prpl">
-        <div className="flex flex-wrap col-span-2 col-start-2 justify-center">
+      <div className="grid gap-5 grid-cols-10 content-center py-10 border-b-2 border-solid border-prpl">
+        {/* INPUT AREA */}
+        <div
+          className={clsx(
+            instance.name === "init"
+              ? "col-span-10 justify-self-center w-1/2"
+              : "col-span-2 col-start-2 self-center",
+            "flex flex-wrap justify-center border border-solid border-yellow-400"
+          )}
+        >
           <MemoSaveBox onPaste={getPaste} save={instance.string ?? null} />
-          <InputSection index={index} instance={instance} update={update} />
-        </div>
-
-        <div className="col-span-4 text-center">
-          This is where the table will be
-        </div>
-
-        <div className="col-span-2 col-start-8 text-center">
-          <div>Extra Stats</div>
-          {instance?.displayData?.xpPerRun > 0 && (
-            <Input
-              label="XP Per Run"
-              defaultValue={addCommas(instance?.displayData?.xpPerRun)}
-              disabled={true}
-              className="bg-thirdary"
-            />
+          {instance.name !== "init" && (
+            <InputSection index={index} instance={instance} update={update} />
           )}
         </div>
+        {instance.name !== "init" && (
+          <>
+            {/* TABLE AREA */}
+            <div className="col-span-4 text-center border border-solid border-pink-400">
+              This is where the table will be
+            </div>
+
+            {/* STATS AREA */}
+            <div className="col-span-2 col-start-8 text-center border border-solid border-green-500">
+              <div>
+                Extra Stats
+                <hr className="m-auto w-3/5" />
+              </div>
+              {instance?.displayData?.xpPerRun > 0 && (
+                <Input
+                  label="XP Per Run"
+                  defaultValue={addCommas(instance?.displayData?.xpPerRun)}
+                  disabled={true}
+                  className="bg-thirdary"
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
     </>
   );

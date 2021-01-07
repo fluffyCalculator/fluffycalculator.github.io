@@ -1,9 +1,8 @@
 import { decompressFromBase64 } from "lz-string";
-import { TrapProperties, GameObject, Portal } from "./GameObject.d";
 // import { testSave1 } from "../test/testSave1.js";
 import { countDailyWeightDaily, DailyMods } from "./daily";
+import { GameObject, Portal, TrapProperties } from "./GameObject.d";
 import { getDailyHeliumValue, isRewardActive } from "./main";
-import { getUniverseChange } from "./oldFluffy";
 
 const extend = require("node.extend/lib/extend");
 // const {
@@ -201,7 +200,7 @@ export class fluffyInstance {
     if (this.universe === 1) {
       mcalc1 = (Math.pow(expGrowth, end - minimumZone) - 1) / (expGrowth - 1);
       mcalc2 =
-        (50 + this.portal.Curious.level * 60) *
+        (baseExp + this.portal.Curious.level * 60) *
         (1 + this.portal.Cunning.level * 0.25) *
         this.expBonus;
     } else {
@@ -239,7 +238,7 @@ export class fluffyInstance {
 
   spireXP = (zone: number) => {
     var reward =
-      (50 + this.portal.Curious.level * 60) *
+      (baseExp + this.portal.Curious.level * 60) *
       Math.pow(expGrowth, zone - this.getMinZoneForExp() - 1) *
       (1 + this.portal.Cunning.level * 0.25);
     return reward * this.expBonus * expGrowth;

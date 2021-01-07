@@ -20,7 +20,7 @@ function InputSection({ index, instance, update }: Props) {
 
   return (
     <>
-      <div className="grid gap-4 grid-cols-2 items-end w-full">
+      <div className="grid gap-4 grid-cols-2 items-end pt-2 w-full">
         {/* U1 */}
         {/*  Set mins and max's later */}
         {instance?.name !== "init" && (
