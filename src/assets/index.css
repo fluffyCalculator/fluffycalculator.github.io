@@ -9,7 +9,7 @@
   --color-text-primary: #0e0e10;
   --color-text-secondary: #aa71ff;
 
-  --color-text-accent: #a775fa;
+  --color-text-accent: #e3e3e5;
 }
 
 .dark-theme {
@@ -20,7 +20,7 @@
   --color-text-primary: #efeff1;
   --color-text-secondary: #772ce8;
 
-  --color-text-accent: #a775fa;
+  --color-text-accent: #404044;
 }
 
 @tailwind components;
@@ -30,4 +30,10 @@ html,
 body {
   margin: 0;
   height: 100%;
+}
+
+@layer components {
+  .cell {
+    @apply border-accent border border-solid;
+  }
 }

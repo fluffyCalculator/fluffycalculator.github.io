@@ -8,6 +8,7 @@ module.exports = {
         tier1: "#DD7E6B",
         tier2: "#AFCB77",
         tier3: "#62BD87",
+        accent: "var(--color-text-accent)",
       },
       backgroundColor: {
         primary: "var(--color-bg-primary)",

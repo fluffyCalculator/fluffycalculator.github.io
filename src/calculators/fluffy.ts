@@ -26,11 +26,10 @@ export function handle_paste(ev): { game: GameObject; string: string } | false {
 }
 
 const growth = 4;
-const expGrowth = 1.015;
 const baseExp = 50;
 const prestigeExpModifier = 5;
 const baseFirstLevel = 1000;
-const maxEvolution = ["filler", 10, 1];
+const maxEvolution = 10;
 
 export class fluffyInstance {
   string: string;
@@ -57,6 +56,7 @@ export class fluffyInstance {
   graphNextIce = false;
   spiresCompleted = [];
   instantUpdating = false;
+  minutesPerRun = 0;
 
   //
   currentExp = 0;
@@ -78,6 +78,13 @@ export class fluffyInstance {
 
   displayData = {
     xpPerRun: 0,
+    table: [],
+  };
+
+  atMaxEvo = () => {
+    if (this.universe === 2) return true;
+    if (this.evolution === maxEvolution) return true;
+    return false;
   };
 
   getLevel = (evolution, exp) => {
@@ -103,7 +110,7 @@ export class fluffyInstance {
   getExpBonus = () => {
     let num = 1;
     if (this.universe === 1) {
-      num *= expGrowth;
+      num *= this.getExpGrowth();
     }
     if (this.dailyBonus > 1) {
       num *= this.dailyBonus;
@@ -136,17 +143,12 @@ export class fluffyInstance {
       universe === 1 ? this.save.lastPortal : this.save.lastRadonPortal;
   };
 
-  getUpgradeExp = (
-    evolution: number,
-    level: number,
-    firstLevel: number,
-    expInLevel: number
-  ) => {
+  getUpgradeExp = (evolution: number, level: number, expInLevel: number) => {
     if (level === 10) {
       return expInLevel;
     }
     return Math.floor(
-      firstLevel *
+      this.firstLevel *
         Math.pow(prestigeExpModifier, evolution) *
         ((Math.pow(growth, level + 1) - 1) / (growth - 1)) -
         this.removeExp(evolution, level)
@@ -184,6 +186,16 @@ export class fluffyInstance {
     }
   };
 
+  getExpGrowth = () => {
+    if (this.universe === 2) return 1.02;
+    return 1.015;
+  };
+
+  getBaseExp = () => {
+    if (this.universe === 2) return 2.5;
+    return 50;
+  };
+
   xpFromZone = (start: number, end: number) => {
     const minimumZone = this.getMinZoneForExp();
     // If ending before you're actually allowed to get xp then return nothing.
@@ -198,16 +210,18 @@ export class fluffyInstance {
     }
 
     if (this.universe === 1) {
-      mcalc1 = (Math.pow(expGrowth, end - minimumZone) - 1) / (expGrowth - 1);
+      mcalc1 =
+        (Math.pow(this.getExpGrowth(), end - minimumZone) - 1) /
+        (this.getExpGrowth() - 1);
       mcalc2 =
-        (baseExp + this.portal.Curious.level * 60) *
+        (this.getBaseExp() + this.portal.Curious.level * 60) *
         (1 + this.portal.Cunning.level * 0.25) *
         this.expBonus;
     } else {
       mcalc1 =
-        (Math.pow(Math.pow(expGrowth, 3), end) - 1) /
-        (Math.pow(expGrowth, 3) - 1);
-      mcalc2 = 2.5 * this.expBonus;
+        (Math.pow(Math.pow(this.getExpGrowth(), 3), end) - 1) /
+        (Math.pow(this.getExpGrowth(), 3) - 1);
+      mcalc2 = this.getBaseExp() * this.expBonus;
     }
 
     let addSpireBonus = 0;
@@ -239,9 +253,9 @@ export class fluffyInstance {
   spireXP = (zone: number) => {
     var reward =
       (baseExp + this.portal.Curious.level * 60) *
-      Math.pow(expGrowth, zone - this.getMinZoneForExp() - 1) *
+      Math.pow(this.getExpGrowth(), zone - this.getMinZoneForExp() - 1) *
       (1 + this.portal.Cunning.level * 0.25);
-    return reward * this.expBonus * expGrowth;
+    return reward * this.expBonus * this.getExpGrowth();
   };
 
   getHeirloomValue = (
@@ -264,9 +278,53 @@ export class fluffyInstance {
     }
   };
 
+  getTableCell = (evolution: number, level: number, prevRuns?: number) => {
+    if (this.evolution === evolution && this.level > level) {
+      return 0;
+    }
+
+    const minimumZone = this.getMinZoneForExp();
+    const xpPerRun = this.displayData.xpPerRun;
+
+    const currentExp = this.evolution === evolution ? this.currentExp : 0;
+
+    const neededExpForLevel = this.getUpgradeExp(evolution, level, currentExp);
+
+    const runs = (neededExpForLevel - currentExp) / xpPerRun;
+    return runs + prevRuns;
+  };
+
+  getTableData = () => {
+    let evolution = this.evolution;
+    this.displayData.xpPerRun = Math.round(
+      this.xpFromZone(0, this.zoneYouPortal)
+    );
+
+    let data = [];
+
+    let runs = 0;
+
+    for (let lev = 0; lev < 10; lev++) {
+      runs = this.getTableCell(evolution, lev, runs);
+      data[lev] = runs;
+    }
+
+    if (!this.atMaxEvo()) {
+      for (let lev = 0; lev < 10; lev++) {
+        runs = this.getTableCell(evolution + 1, lev, runs);
+        data[lev] = [data[lev], runs];
+      }
+    }
+
+    console.log(data);
+
+    return data;
+  };
+
   updateDisplayData = () => {
     this.displayData = {
       xpPerRun: Math.round(this.xpFromZone(0, this.zoneYouPortal)),
+      table: this.getTableData(),
     };
   };
 

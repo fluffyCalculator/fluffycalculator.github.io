@@ -46,7 +46,7 @@ const Input = ({
           disabled={disabled ?? null}
           className={clsx(
             className,
-            "block p-1 pl-2 w-full text-xs bg-secondary border border-solid border-prpl rounded focus:outline-none sm:text-base"
+            "border-accent block p-1 pl-2 w-full text-xs bg-secondary border border-solid rounded focus:outline-none sm:text-base"
           )}
         />
       </div>

@@ -34,11 +34,13 @@
 // }
 
 import clsx from "clsx";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { fluffyInstance, handle_paste } from "../../calculators/fluffy";
+import { testSave1 } from "../../testsaves/one";
 import Button from "../utils/Button";
 import Input from "../utils/Input";
 import InputSection from "./InputSection";
+import Table from "./Table";
 
 // This keeps all update props.
 
@@ -60,7 +62,7 @@ function SaveBox({ onPaste, save }: { onPaste: (e) => void; save?: string }) {
         </Button>
       )}
       <textarea
-        className="p-2 w-full text-xl bg-secondary border border-solid border-prpl rounded outline-none shadow-md resize-none"
+        className="border-accent p-2 w-full text-xl bg-secondary border border-solid rounded outline-none shadow-md resize-none"
         onPaste={onPaste}
         ref={textRef}
         placeholder="Paste your save..."
@@ -86,6 +88,11 @@ function Template({
 
   const instantUpdating = instance.instantUpdating;
 
+  useEffect(() => {
+    instance.pasteSaveActions(testSave1);
+    setUpdate(!update);
+  }, []);
+
   const getPaste = (e) => {
     console.log(e);
     let save = handle_paste(e);
@@ -100,14 +107,14 @@ function Template({
 
   return (
     <>
-      <div className="grid gap-5 grid-cols-10 content-center py-10 border-b-2 border-solid border-prpl">
+      <div className="grid gap-5 grid-cols-10 content-center py-10">
         {/* INPUT AREA */}
         <div
           className={clsx(
             instance.name === "init"
               ? "col-span-10 justify-self-center w-1/2"
               : "col-span-2 col-start-2 self-center",
-            "flex flex-wrap justify-center border border-solid border-yellow-400"
+            "flex flex-wrap justify-center"
           )}
         >
           <MemoSaveBox onPaste={getPaste} save={instance.string ?? null} />
@@ -118,15 +125,23 @@ function Template({
         {instance.name !== "init" && (
           <>
             {/* TABLE AREA */}
-            <div className="col-span-4 text-center border border-solid border-pink-400">
-              This is where the table will be
+            <div className="col-span-4 text-center">
+              <Table
+                second={!instance.atMaxEvo()}
+                time={instance.minutesPerRun}
+                data={{
+                  evolution: instance.evolution,
+                  level: instance.level,
+                  table: instance.displayData.table,
+                }}
+              />
             </div>
 
             {/* STATS AREA */}
-            <div className="col-span-2 col-start-8 text-center border border-solid border-green-500">
+            <div className="col-span-2 col-start-8 text-center">
               <div>
                 Extra Stats
-                <hr className="m-auto w-3/5" />
+                <hr className="m-auto my-2 w-3/5 border-prpl shadow" />
               </div>
               {instance?.displayData?.xpPerRun > 0 && (
                 <Input
@@ -140,6 +155,7 @@ function Template({
           </>
         )}
       </div>
+      <hr className="m-auto w-3/6 border-prpl shadow" />
     </>
   );
 }

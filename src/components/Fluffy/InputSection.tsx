@@ -96,11 +96,15 @@ function InputSection({ index, instance, update }: Props) {
               label="Ice Enlightenment"
               type="button"
               defaultValue="Yes"
-              className="cursor-pointer"
+              className="cursor-pointer select-none"
             />
-            <hr className="border-bgthirdary col-span-2" />
+            <hr className="col-span-2 m-auto w-3/4 border-prpl shadow" />
 
-            <Input label="Minutes Per Run" variant="fluffy" />
+            <Input
+              label="Minutes Per Run"
+              variant="fluffy"
+              defaultValue={instance.minutesPerRun}
+            />
             <Button className="col-span-2 text-center">Calculate</Button>
           </>
         )}
