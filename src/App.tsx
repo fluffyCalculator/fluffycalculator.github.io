@@ -24,10 +24,10 @@ function App() {
       <main>
         <NavBar />
         <Switch>
-          <Route path="/fluffy">
+          <Route path="/(fluffy|)">
             <Fluffy />
           </Route>
-          <Route path="/(daily|)">
+          <Route path="/daily">
             <Daily />
           </Route>
         </Switch>

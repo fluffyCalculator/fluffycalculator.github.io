@@ -34,6 +34,6 @@ body {
 
 @layer components {
   .cell {
-    @apply border-accent border border-solid;
+    @apply border border-solid border-accent;
   }
 }

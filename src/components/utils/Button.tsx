@@ -14,7 +14,7 @@ function Button({ onClick, className, children, variant }: Props) {
       className={clsx(
         className,
         variant === "retrieve" ? "p-1 text-sm" : " text-sm sm:text-base p-2",
-        "border-accent self-center bg-secondary border border-solid rounded shadow cursor-pointer select-none"
+        "self-center bg-secondary border border-solid border-accent rounded shadow cursor-pointer select-none"
       )}
       onClick={onClick}
     >
