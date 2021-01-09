@@ -56,7 +56,7 @@ export class fluffyInstance {
   graphNextIce = false;
   spiresCompleted = [];
   instantUpdating = false;
-  minutesPerRun = 0;
+  minutesPerRun = 14;
 
   //
   currentExp = 0;

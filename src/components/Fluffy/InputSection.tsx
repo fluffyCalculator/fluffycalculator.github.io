@@ -13,18 +13,14 @@ function InputSection({ index, instance, update }: Props) {
   console.log("rendered Input Section", index);
   // console.log(instance);
 
-  const handleSubmit = (e) => {
-    console.log(e);
-    console.log("submitted");
-  };
-
   return (
     <>
-      <div className="grid gap-4 grid-cols-2 items-end pt-2 w-full">
+      <div className="grid gap-4 grid-cols-2 items-end mt-4 w-full">
         {/* U1 */}
         {/*  Set mins and max's later */}
         {instance?.name !== "init" && (
           <>
+            <hr className="col-span-2 m-auto w-3/4 border-accent shadow" />
             <Input
               label="Capable Level"
               min={1}
@@ -98,7 +94,8 @@ function InputSection({ index, instance, update }: Props) {
               defaultValue="Yes"
               className="cursor-pointer select-none"
             />
-            <hr className="col-span-2 m-auto w-3/4 border-prpl shadow" />
+
+            <hr className="col-span-2 m-auto w-3/4 border-accent shadow" />
 
             <Input
               label="Minutes Per Run"

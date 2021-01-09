@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { DailyContext } from "./Context";
 import Box, { WeekBox } from "./Box";
+import { DailyContext } from "./Context";
 import Filter from "./Filter";
 import UniverseSwitch from "./UniverseSwitch";
 
@@ -23,7 +23,7 @@ function Daily() {
       <UniverseSwitch />
 
       <Filter />
-      <div className="grid gap-2 grid-cols-7 mt-3">
+      <div className="grid gap-2 grid-cols-7">
         {days.map((x, idx) => {
           return <WeekBox key={idx} text={x} />;
         })}

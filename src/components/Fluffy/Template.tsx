@@ -62,7 +62,7 @@ function SaveBox({ onPaste, save }: { onPaste: (e) => void; save?: string }) {
         </Button>
       )}
       <textarea
-        className="border-accent p-2 w-full text-xl bg-secondary border border-solid rounded outline-none shadow-md resize-none"
+        className="p-2 w-full text-sm bg-secondary border border-solid border-accent rounded outline-none shadow-md resize-none"
         onPaste={onPaste}
         ref={textRef}
         placeholder="Paste your save..."
@@ -107,13 +107,13 @@ function Template({
 
   return (
     <>
-      <div className="grid gap-5 grid-cols-10 content-center py-10">
+      <div className="grid gap-2 grid-cols-1 content-center py-10 sm:grid-cols-2 md:gap-5 md:grid-cols-4 xl:grid-cols-10">
         {/* INPUT AREA */}
         <div
           className={clsx(
             instance.name === "init"
               ? "col-span-10 justify-self-center w-1/2"
-              : "col-span-2 col-start-2 self-center",
+              : "self-center xl:col-span-2 xl:col-start-2",
             "flex flex-wrap justify-center"
           )}
         >
@@ -125,7 +125,7 @@ function Template({
         {instance.name !== "init" && (
           <>
             {/* TABLE AREA */}
-            <div className="col-span-4 text-center">
+            <div className="text-center md:col-span-2 xl:col-span-4">
               <Table
                 second={!instance.atMaxEvo()}
                 time={instance.minutesPerRun}
@@ -138,24 +138,24 @@ function Template({
             </div>
 
             {/* STATS AREA */}
-            <div className="col-span-2 col-start-8 text-center">
-              <div>
+            <div className="text-center sm:col-span-2 sm:mt-3 md:col-span-1 md:mt-0 xl:col-span-2">
+              <div className="m-auto w-1/2 md:w-auto">
                 Extra Stats
-                <hr className="m-auto my-2 w-3/5 border-prpl shadow" />
+                <hr className="m-auto my-2 w-3/5 border-accent shadow" />
+                {instance?.displayData?.xpPerRun > 0 && (
+                  <Input
+                    label="XP Per Run"
+                    defaultValue={addCommas(instance?.displayData?.xpPerRun)}
+                    disabled={true}
+                    className="bg-thirdary"
+                  />
+                )}
               </div>
-              {instance?.displayData?.xpPerRun > 0 && (
-                <Input
-                  label="XP Per Run"
-                  defaultValue={addCommas(instance?.displayData?.xpPerRun)}
-                  disabled={true}
-                  className="bg-thirdary"
-                />
-              )}
             </div>
           </>
         )}
       </div>
-      <hr className="m-auto w-3/6 border-prpl shadow" />
+      <hr className="m-auto w-4/6 border-prpl shadow" />
     </>
   );
 }

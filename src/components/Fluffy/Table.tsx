@@ -11,7 +11,6 @@ interface Props {
 }
 
 function sformat(s: number) {
-  console.log("s", s);
   if (s === 0) return 0;
   var fm = [
     Math.floor(s / 60 / 60 / 24), // DAYS
