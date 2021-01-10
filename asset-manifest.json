@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/typescript-fluffy/static/css/main.1aaed0a9.chunk.css",
+    "main.js": "/typescript-fluffy/static/js/main.206dfb87.chunk.js",
+    "main.js.map": "/typescript-fluffy/static/js/main.206dfb87.chunk.js.map",
+    "runtime-main.js": "/typescript-fluffy/static/js/runtime-main.b472a9dc.js",
+    "runtime-main.js.map": "/typescript-fluffy/static/js/runtime-main.b472a9dc.js.map",
+    "static/js/2.538a9c62.chunk.js": "/typescript-fluffy/static/js/2.538a9c62.chunk.js",
+    "static/js/2.538a9c62.chunk.js.map": "/typescript-fluffy/static/js/2.538a9c62.chunk.js.map",
+    "index.html": "/typescript-fluffy/index.html",
+    "static/css/main.1aaed0a9.chunk.css.map": "/typescript-fluffy/static/css/main.1aaed0a9.chunk.css.map",
+    "static/js/2.538a9c62.chunk.js.LICENSE.txt": "/typescript-fluffy/static/js/2.538a9c62.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b472a9dc.js",
+    "static/js/2.538a9c62.chunk.js",
+    "static/css/main.1aaed0a9.chunk.css",
+    "static/js/main.206dfb87.chunk.js"
+  ]
+}
