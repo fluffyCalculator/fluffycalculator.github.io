@@ -1392,18 +1392,18 @@ export interface Portal {
   Motivation_II: LootingIIOrCarpentryIIOrMotivationIIOrPowerIIOrToughnessII;
   Power_II: LootingIIOrCarpentryIIOrMotivationIIOrPowerIIOrToughnessII;
   Toughness_II: LootingIIOrCarpentryIIOrMotivationIIOrPowerIIOrToughnessII;
-  Capable: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
-  Cunning: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
-  Curious: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
-  Classy: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
+  Capable: PerkProps;
+  Cunning: PerkProps;
+  Curious: PerkProps;
+  Classy: PerkProps;
   Overkill: OverkillOrResilienceOrCarpentryOrArtisanistryOrRangeOrAgilityOrBaitOrTrumpsOrPheromonesOrPackratOrMotivationOrPowerOrToughnessOrLooting;
-  Resourceful: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
+  Resourceful: PerkProps;
   Coordinated: Coordinated;
-  Siphonology: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
-  Anticipation: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
+  Siphonology: PerkProps;
+  Anticipation: PerkProps;
   Resilience: OverkillOrResilienceOrCarpentryOrArtisanistryOrRangeOrAgilityOrBaitOrTrumpsOrPheromonesOrPackratOrMotivationOrPowerOrToughnessOrLooting;
-  Meditation: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
-  Relentlessness: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
+  Meditation: PerkProps;
+  Relentlessness: PerkProps;
   Greed: GreedOrCriticalityOrPrismal;
   Tenacity: Tenacity;
   Criticality: GreedOrCriticalityOrPrismal;
@@ -1430,7 +1430,7 @@ export interface LootingIIOrCarpentryIIOrMotivationIIOrPowerIIOrToughnessII {
   heliumSpent: number;
   additive: boolean;
 }
-export interface CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness {
+export interface PerkProps {
   level: number;
   locked: boolean;
   heliumSpent: number;

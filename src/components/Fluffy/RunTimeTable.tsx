@@ -26,7 +26,7 @@ function sformat(s: number) {
     .replace(/00:/g, "");
 }
 
-function Table({ data, second, time }: Props): ReactElement {
+function RunTimeTable({ data, second, time }: Props): ReactElement {
   return (
     <>
       <div className="my-2 text-xl">{`E${data.evolution}L${data.level}`}</div>
@@ -41,7 +41,7 @@ function Table({ data, second, time }: Props): ReactElement {
             {second && (
               <th className="cell">{`Runs to E${data.evolution + 1}`}</th>
             )}
-            {time > 0 && (
+            {second && time > 0 && (
               <th className="cell">{`Time to E${data.evolution + 1}`}</th>
             )}
           </tr>
@@ -75,4 +75,4 @@ function Table({ data, second, time }: Props): ReactElement {
   );
 }
 
-export default React.memo(Table);
+export default RunTimeTable;

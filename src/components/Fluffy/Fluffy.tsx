@@ -24,7 +24,7 @@ function Fluffy() {
       </div>
       <div className="flex justify-center text-center">
         <div
-          className="border-t-1 flex justify-center place-items-center m-auto w-32 h-32 text-primary text-9xl cursor-pointer select-none"
+          className="w-32 h-32 text-primary text-9xl cursor-pointer select-none"
           onClick={() => {
             anotherInstance();
           }}

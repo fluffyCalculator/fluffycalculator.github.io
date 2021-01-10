@@ -74,11 +74,19 @@ export class fluffyInstance {
     fluffyPrestige2: 0,
     lastPortal: 0, // game.global.lastPortal
     lastRadonPortal: 0, // game.global.lastRadonPortal
+    bestFluffyExp: 0,
+    zone: [0, 0],
+    heirloomBonus: 0,
   };
 
   displayData = {
     xpPerRun: 0,
+    currentZone: 0,
     table: [],
+    percentToLevel: 0,
+    bonesToLevel: 0,
+    XPhr: 0,
+    name: "init",
   };
 
   atMaxEvo = () => {
@@ -130,19 +138,6 @@ export class fluffyInstance {
     return num;
   };
 
-  updateUniverse = (universe: number) => {
-    this.universe = universe;
-    this.name = universe === 1 ? "Fluffy" : "Scruffy";
-
-    this.evolution =
-      universe === 1 ? this.save.fluffyPrestige : this.save.fluffyPrestige2;
-
-    this.exp = universe === 1 ? this.save.fluffyExp : this.save.fluffyExp2;
-
-    this.zoneYouPortal =
-      universe === 1 ? this.save.lastPortal : this.save.lastRadonPortal;
-  };
-
   getUpgradeExp = (evolution: number, level: number, expInLevel: number) => {
     if (level === 10) {
       return expInLevel;
@@ -153,27 +148,6 @@ export class fluffyInstance {
         ((Math.pow(growth, level + 1) - 1) / (growth - 1)) -
         this.removeExp(evolution, level)
     );
-  };
-
-  getDailyBonus = (
-    daily: DailyMods,
-    universe: number,
-    evolution: number,
-    level: number,
-    boughtEarly: boolean
-  ) => {
-    if (daily.seed) {
-      return (
-        getDailyHeliumValue(
-          countDailyWeightDaily(daily),
-          isRewardActive("dailies", universe, evolution, level, boughtEarly)
-        ) /
-          100 +
-        1
-      );
-    } else {
-      return 1;
-    }
   };
 
   getMinZoneForExp = () => {
@@ -283,7 +257,6 @@ export class fluffyInstance {
       return 0;
     }
 
-    const minimumZone = this.getMinZoneForExp();
     const xpPerRun = this.displayData.xpPerRun;
 
     const currentExp = this.evolution === evolution ? this.currentExp : 0;
@@ -304,27 +277,83 @@ export class fluffyInstance {
 
     let runs = 0;
 
-    for (let lev = 0; lev < 10; lev++) {
+    let startingLevel = this.universe === 2 ? this.level : 0;
+
+    for (let lev = startingLevel; lev < startingLevel + 10; lev++) {
       runs = this.getTableCell(evolution, lev, runs);
-      data[lev] = runs;
+      data[lev] = [runs];
     }
 
     if (!this.atMaxEvo()) {
       for (let lev = 0; lev < 10; lev++) {
         runs = this.getTableCell(evolution + 1, lev, runs);
-        data[lev] = [data[lev], runs];
+        data[lev].push(runs);
       }
     }
-
-    console.log(data);
 
     return data;
   };
 
+  updateUniverse = (universe: number) => {
+    this.universe = universe;
+    this.name = universe === 1 ? "Fluffy" : "Scruffy";
+
+    this.evolution =
+      universe === 1 ? this.save.fluffyPrestige : this.save.fluffyPrestige2;
+
+    this.exp = universe === 1 ? this.save.fluffyExp : this.save.fluffyExp2;
+
+    this.zoneYouPortal =
+      universe === 1 ? this.save.lastPortal : this.save.lastRadonPortal;
+
+    this.level = this.getLevel(this.evolution, this.exp);
+
+    this.currentExp = Math.ceil(
+      this.exp - this.removeExp(this.evolution, this.level)
+    );
+
+    this.heirloomBonus = getHeirloomValue(
+      this.save.heirloomBonus,
+      this.universe,
+      this.evolution,
+      this.level,
+      this.purchasedFluffyExpBonus
+    );
+
+    this.dailyBonus = getDailyBonus(
+      this.daily,
+      this.universe,
+      this.evolution,
+      this.level,
+      this.purchasedFluffyExpBonus
+    );
+  };
+
   updateDisplayData = () => {
+    const neededExpForLevel = this.getUpgradeExp(this.evolution, this.level, 0);
+    const xpPerRun = Math.round(this.xpFromZone(0, this.zoneYouPortal));
+    const currentZone =
+      this.universe === this.save.zone[0] ? this.save.zone[1] : 0;
+
     this.displayData = {
-      xpPerRun: Math.round(this.xpFromZone(0, this.zoneYouPortal)),
+      xpPerRun: xpPerRun,
       table: this.getTableData(),
+      currentZone: currentZone,
+      percentToLevel: Number(
+        ((this.currentExp / neededExpForLevel) * 100).toFixed(2)
+      ),
+      bonesToLevel:
+        this.universe === 1
+          ? Math.ceil(
+              (neededExpForLevel - this.currentExp) / this.save.bestFluffyExp
+            ) * 100
+          : 0,
+      XPhr:
+        this.minutesPerRun > 0
+          ? Math.round((xpPerRun / this.minutesPerRun) * 60)
+          : 0,
+
+      name: this.name,
     };
   };
 
@@ -334,47 +363,27 @@ export class fluffyInstance {
       fluffyExp2: gameSave.global.fluffyExp2,
       fluffyPrestige: gameSave.global.fluffyPrestige,
       fluffyPrestige2: gameSave.global.fluffyPrestige2,
-      lastPortal: gameSave.global.lastPortal, // game.global.lastPortal
-      lastRadonPortal: gameSave.global.lastRadonPortal, // game.global.lastRadonPortal
+      lastPortal: gameSave.global.lastPortal,
+      lastRadonPortal: gameSave.global.lastRadonPortal,
+      bestFluffyExp: gameSave.stats.bestFluffyExp.valueTotal,
+      zone: [gameSave.global.universe, gameSave.global.world],
+      heirloomBonus: gameSave.heirlooms.Staff.FluffyExp.currentBonus,
     };
-
-    this.updateUniverse(gameSave.global.universe);
-
-    this.level = this.getLevel(this.evolution, this.exp);
 
     this.daily = extend(true, {}, gameSave.global.dailyChallenge);
     this.portal = extend(true, {}, gameSave.portal);
+
+    this.updateUniverse(gameSave.global.universe);
 
     this.purchasedFluffyExpBonus = gameSave.talents.fluffyExp.purchased;
 
     this.purchasedFluffyPrestigeBonus =
       gameSave.talents.fluffyAbility.purchased;
 
-    this.dailyBonus = this.getDailyBonus(
-      this.daily,
-      this.universe,
-      this.evolution,
-      this.level,
-      this.purchasedFluffyExpBonus
-    );
-
-    this.heirloomBonus = this.getHeirloomValue(
-      gameSave.heirlooms.Staff.FluffyExp.currentBonus,
-      this.universe,
-      this.evolution,
-      this.level,
-      this.purchasedFluffyExpBonus
-    );
-
     this.traps = extend(true, {}, gameSave.playerSpire.traps.Knowledge);
 
     this.iceBonus =
       this.universe === 1 ? 1 + 0.0025 * gameSave.empowerments.Ice.level : 1;
-
-    this.currentExp = Math.ceil(
-      this.exp - this.removeExp(this.evolution, this.level)
-    );
-    console.log("this.currentExp", this.currentExp);
 
     this.expBonus = this.getExpBonus();
 
@@ -382,13 +391,106 @@ export class fluffyInstance {
 
     console.log(this);
   };
+
+  saveLocalStorage = () => {
+    localStorage.setItem(
+      "fluffy-fluffy",
+      JSON.stringify({
+        instantUpdating: this.instantUpdating,
+        minutesPerRun: this.minutesPerRun,
+        spiresCompleted: this.spiresCompleted,
+      })
+    );
+  };
+
+  getLocalStorage = () => {
+    let saveObj = JSON.parse(localStorage.getItem("fluffy-fluffy"));
+
+    this.instantUpdating = saveObj?.instantUpdating ?? false;
+    this.minutesPerRun = saveObj?.minutesPerRun ?? 0;
+    this.spiresCompleted = saveObj?.spiresCompleted ?? [];
+  };
+
+  changeVar = (label: string, value: string) => {
+    switch (label) {
+      case "Capable Level":
+        this.portal.Capable.level = Number(value);
+        break;
+      case "Cunning Level":
+        this.portal.Cunning.level = Number(value);
+        break;
+      case "Curious Level":
+        this.portal.Curious.level = Number(value);
+        break;
+      case "Classy Level":
+        this.portal.Classy.level = Number(value);
+        break;
+      case "Zone You Portal":
+        this.zoneYouPortal = Number(value);
+        break;
+      case "Daily Bonus":
+        this.dailyBonus = Number(value) / 100 + 1;
+        this.expBonus = this.getExpBonus();
+        break;
+      case "Heirloom Bonus":
+        this.heirloomBonus = Number(value) / 100 + 1;
+        this.expBonus = this.getExpBonus();
+        break;
+      case "List of Spire Clears":
+        this.spiresCompleted = value.split(",").map(Number);
+        this.saveLocalStorage();
+        break;
+      case "Knowledge Towers":
+        this.traps.owned = Number(value);
+        break;
+      case "Knowledge Level":
+        this.traps.level = Number(value);
+        break;
+      case "Minutes Per Run":
+        this.minutesPerRun = Number(value);
+        this.saveLocalStorage();
+        break;
+    }
+  };
 }
 
-// const test = pasteSaveActions(testSave1);
-// console.log("test", test);
+const getHeirloomValue = (
+  bonus: number,
+  universe: number,
+  evolution: number,
+  level: number,
+  boughtEarly: boolean
+) => {
+  var b = bonus / 100 + 1;
+  if (
+    universe === 2 &&
+    !isRewardActive("heirloopy", universe, evolution, level, boughtEarly)
+  )
+    b = (b - 1) * 0.1 + 1;
+  if (b > 1) {
+    return b;
+  } else if (b === 1) {
+    return 1;
+  }
+};
 
-// TODO
-
-// ADD CURRENT ZONE
-// ADD NEEDEDEXP
-// ADD EXPINLEVEL
+const getDailyBonus = (
+  daily: DailyMods,
+  universe: number,
+  evolution: number,
+  level: number,
+  boughtEarly: boolean
+) => {
+  if (daily.seed) {
+    return (
+      getDailyHeliumValue(
+        countDailyWeightDaily(daily),
+        isRewardActive("dailies", universe, evolution, level, boughtEarly)
+      ) /
+        100 +
+      1
+    );
+  } else {
+    return 1;
+  }
+};

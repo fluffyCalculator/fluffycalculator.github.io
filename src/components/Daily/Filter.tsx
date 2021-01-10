@@ -2,6 +2,7 @@ import clsx from "clsx";
 import React, { useContext, useState } from "react";
 import Button from "../utils/Button";
 import Input from "../utils/Input";
+import Label from "../utils/Label";
 import { DailyContext } from "./Context";
 
 export var filterTypes = {
@@ -80,9 +81,8 @@ function Filter() {
         onClick={() => {
           setShowFilter(!showFilter);
         }}
-      >
-        Filter
-      </Button>
+        label="Filter"
+      />
 
       {showFilter && (
         <div className="w-11/12 text-center sm:w-9/12 md:w-3/4 lg:w-5/12">
@@ -109,20 +109,19 @@ function Filter() {
 
                 updateDailiesFiltered();
               }}
-            >
-              Flip All
-            </Button>
-
-            <Input
-              label="Match Atleast"
-              type="number"
-              onChange={(e) => {
-                toMatch = Number(e.target.value);
-                updateDailiesFiltered();
-              }}
-              parentClassName="ml-2 w-24"
-              defaultValue={toMatch}
-            ></Input>
+              label="Flip All"
+            />
+            <Label className="ml-2 w-24">
+              Match Atleast
+              <Input
+                type="number"
+                onChange={(e) => {
+                  toMatch = Number(e.target.value);
+                  updateDailiesFiltered();
+                }}
+                defaultValue={toMatch}
+              />
+            </Label>
           </div>
         </div>
       )}

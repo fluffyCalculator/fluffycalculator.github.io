@@ -23,7 +23,7 @@ function Daily() {
       <UniverseSwitch />
 
       <Filter />
-      <div className="grid gap-2 grid-cols-7">
+      <div className="grid gap-2 grid-cols-7 mb-4">
         {days.map((x, idx) => {
           return <WeekBox key={idx} text={x} />;
         })}

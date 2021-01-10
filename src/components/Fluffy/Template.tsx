@@ -34,13 +34,14 @@
 // }
 
 import clsx from "clsx";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { fluffyInstance, handle_paste } from "../../calculators/fluffy";
 import { testSave1 } from "../../testsaves/one";
 import Button from "../utils/Button";
-import Input from "../utils/Input";
 import InputSection from "./InputSection";
-import Table from "./Table";
+import RunTimeTable from "./RunTimeTable";
+import Stats from "./Stats";
+import UniverseSwitch from "./UniverseSwitch";
 
 // This keeps all update props.
 
@@ -51,15 +52,14 @@ function SaveBox({ onPaste, save }: { onPaste: (e) => void; save?: string }) {
     <>
       {save && show && (
         <Button
-          variant="retrieve"
+          variant="small"
           className="col-span-2 self-center mb-4"
           onClick={() => {
             textRef.current.innerText = save;
             setShow(!show);
           }}
-        >
-          Retrieve save
-        </Button>
+          label="Retrieve save"
+        />
       )}
       <textarea
         className="p-2 w-full text-sm bg-secondary border border-solid border-accent rounded outline-none shadow-md resize-none"
@@ -83,26 +83,43 @@ function Template({
   index: number;
   instance: fluffyInstance;
 }) {
-  console.log("instance", instance);
+  console.log("rendering instance", instance);
   const [update, setUpdate] = useState(true);
 
-  const instantUpdating = instance.instantUpdating;
-
   useEffect(() => {
-    instance.pasteSaveActions(testSave1);
-    setUpdate(!update);
+    if (!true) {
+      instance.pasteSaveActions(testSave1);
+      setUpdate(!update);
+    }
   }, []);
 
+  if (instance.name === "init") {
+    instance.getLocalStorage();
+  }
+
+  const forceRefresh = useCallback(() => {
+    setUpdate((prev) => !prev);
+  }, [setUpdate]);
+
+  const changeUniverse = useCallback(
+    (universe: number) => {
+      if (universe === instance.universe) return;
+
+      instance.updateUniverse(universe);
+      instance.expBonus = instance.getExpBonus();
+      instance.updateDisplayData();
+      forceRefresh();
+    },
+    [forceRefresh]
+  );
+
   const getPaste = (e) => {
-    console.log(e);
     let save = handle_paste(e);
     if (save === false) return;
-
     instance.pasteSaveActions(save.game);
-
-    setUpdate(!update);
-
     instance.string = save.string;
+
+    forceRefresh();
   };
 
   return (
@@ -119,14 +136,24 @@ function Template({
         >
           <MemoSaveBox onPaste={getPaste} save={instance.string ?? null} />
           {instance.name !== "init" && (
-            <InputSection index={index} instance={instance} update={update} />
+            <InputSection
+              index={index}
+              instance={instance}
+              universe={instance.universe}
+              renderParent={forceRefresh}
+            />
           )}
         </div>
         {instance.name !== "init" && (
           <>
             {/* TABLE AREA */}
             <div className="text-center md:col-span-2 xl:col-span-4">
-              <Table
+              <UniverseSwitch
+                universe={instance.universe}
+                onClick={changeUniverse}
+              />
+
+              <RunTimeTable
                 second={!instance.atMaxEvo()}
                 time={instance.minutesPerRun}
                 data={{
@@ -140,16 +167,7 @@ function Template({
             {/* STATS AREA */}
             <div className="text-center sm:col-span-2 sm:mt-3 md:col-span-1 md:mt-0 xl:col-span-2">
               <div className="m-auto w-1/2 md:w-auto">
-                Extra Stats
-                <hr className="m-auto my-2 w-3/5 border-accent shadow" />
-                {instance?.displayData?.xpPerRun > 0 && (
-                  <Input
-                    label="XP Per Run"
-                    defaultValue={addCommas(instance?.displayData?.xpPerRun)}
-                    disabled={true}
-                    className="bg-thirdary"
-                  />
-                )}
+                <Stats data={instance.displayData} />
               </div>
             </div>
           </>
@@ -163,7 +181,3 @@ function Template({
 export default React.memo(Template, (prevProps, nextProps) => {
   return prevProps.index === nextProps.index;
 });
-
-function addCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
