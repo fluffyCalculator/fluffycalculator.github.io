@@ -64,10 +64,10 @@ function Template({
   const [update, setUpdate] = useState(true);
 
   useEffect(() => {
-    // if (false) {
-    instance.pasteSaveActions(two);
-    setUpdate(!update);
-    // }
+    if (false) {
+      instance.pasteSaveActions(two);
+      setUpdate(!update);
+    }
   }, []);
 
   if (instance.name === "init") {
