@@ -675,7 +675,6 @@ export var dailyModifiers = {
         if (result > max) max = result;
         results.push(result);
       }
-      console.log(results);
       return "Min: " + min + ", Max: " + max;
     },
     reflectDamage: function (str, attack) {

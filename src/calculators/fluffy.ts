@@ -16,7 +16,6 @@ const extend = require("node.extend/lib/extend");
 export function handle_paste(ev): { game: GameObject; string: string } | false {
   var save_string = ev.clipboardData.getData("text/plain").replace(/\s/g, "");
   const game = JSON.parse(decompressFromBase64(save_string)) ?? null;
-  console.log("game", game);
   if (game?.global === undefined) return false;
 
   return {
@@ -216,8 +215,6 @@ export class fluffyInstance {
         (spireNumber) => (spireNumber + 1) * 100
       );
 
-      console.log("spiresCompletedZones", spiresCompletedZones);
-
       addSpireBonus = spiresCompletedZones.reduce((total, zone) => {
         if (start < zone && end > zone) return total + this.spireXP(zone);
 
@@ -356,7 +353,6 @@ export class fluffyInstance {
         }
       }
     }
-    console.log("data", data);
     return data;
   };
 
@@ -457,8 +453,6 @@ export class fluffyInstance {
     this.expBonus = this.getExpBonus();
 
     this.updateDisplayData();
-
-    console.log(this);
   };
 
   saveLocalStorage = () => {

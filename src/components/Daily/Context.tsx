@@ -17,10 +17,8 @@ const DailyProvider = ({ children }) => {
   const updateDailies = () => {
     const updateDailies = maybeMakeDaily(365, false);
     if (updateDailies.length === 0) {
-      console.log("couldnt update dailies wtf!!!");
       return;
     }
-    console.log("i did update dailies");
     setDailies(updateDailies);
   };
 

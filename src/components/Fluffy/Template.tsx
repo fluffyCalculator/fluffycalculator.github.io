@@ -61,7 +61,6 @@ function Template({
   index: number;
   instance: fluffyInstance;
 }) {
-  console.log("rendering instance", instance);
   const [update, setUpdate] = useState(true);
 
   useEffect(() => {
@@ -81,7 +80,6 @@ function Template({
 
   const changeUniverse = useCallback(
     (universe: number) => {
-      console.log("in this DDDD");
       if (universe === instance.universe) return;
 
       instance.updateUniverse(universe);

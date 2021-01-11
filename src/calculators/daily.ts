@@ -32,7 +32,6 @@ export type DailyType = {
 };
 
 export function makeDaily(times): Partial<DailyType>[] {
-  console.log("making dailies", times);
   let returnable: DailyType[] = [];
   var todayOfWeek: number = getDailyTimeString(0, true);
   for (var z = 0; z < 8; z++) {
@@ -290,7 +289,6 @@ export function maybeMakeDaily(times, force) {
   } else {
     let dailies = makeDaily(times);
     lastSeed = newestSeed;
-    console.log("made dailies i guess lawl", times, dailies);
     return dailies;
   }
 }

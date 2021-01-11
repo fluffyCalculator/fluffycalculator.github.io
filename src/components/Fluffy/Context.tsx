@@ -16,15 +16,12 @@ const FluffyProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [shown, setShown] = useState([0]);
 
-  console.log("fluffyInstances", fluffyInstances);
-
   const anotherInstance = () => {
-    console.log("clicking another instance");
+    console.log("Adding another Fluffy Instance. Epic");
     setShown((old) => [...old, old.length - 1]);
     setFluffyInstance((old) => {
       return { ...old, [Object.keys(old).length]: new fluffyInstance() };
     });
-    console.log(fluffyInstances);
   };
 
   return (

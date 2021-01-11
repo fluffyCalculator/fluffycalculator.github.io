@@ -17,7 +17,6 @@ const days = [
 function Daily() {
   const { dailies } = useContext(DailyContext);
 
-  console.log("rendered dailies");
   return (
     <div className="flex flex-col flex-wrap items-center">
       <UniverseSwitch />

@@ -54,9 +54,6 @@ interface Props {
 }
 
 function InputSection({ index, instance, universe, renderParent }: Props) {
-  console.log("rendered Input Section", index);
-  // console.log(instance);
-
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target: HTMLInputElement = e.target;
 
