@@ -1,20 +1,20 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 import Daily from "./components/Daily/Daily";
 import Fluffy from "./components/Fluffy/Fluffy";
 import NavBar from "./components/NavBar";
 
 function App() {
   return (
-    <Router>
+    <HashRouter basename="/" hashType="noslash">
       <main>
         <NavBar />
         <Switch>
-          <Route path="/(fluffy|)" component={Fluffy} />
           <Route path="/daily" component={Daily} />
+          <Route path="/(fluffy|)" component={Fluffy} />
         </Switch>
       </main>
-    </Router>
+    </HashRouter>
   );
 }
 
