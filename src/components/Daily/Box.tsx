@@ -3,25 +3,18 @@ import React, { useState } from "react";
 import { DailyType } from "../../calculators/daily";
 import { dailyModifiers } from "../../calculators/main";
 
-export const WeekBox =
-  //  React.memo(
-  function WeekBox({ text }: { text: string }) {
-    return (
-      <div
-        className={clsx(
-          baseBox,
-          "flex items-center justify-center text-xxs select-none sm:text-xs md:text-base"
-        )}
-      >
-        {text}
-      </div>
-    );
-  };
-//   ,
-//   (prevProps, nextProps) => {
-//     return prevProps.text === nextProps.text;
-//   }
-// );
+export const WeekBox = function WeekBox({ text }: { text: string }) {
+  return (
+    <div
+      className={clsx(
+        baseBox,
+        "flex items-center justify-center text-xxs select-none sm:text-xs md:text-base"
+      )}
+    >
+      {text}
+    </div>
+  );
+};
 
 const baseBox = "w-11 h-11 sm:h-16 sm:w-16 md:w-24 md:h-24";
 
@@ -81,7 +74,3 @@ function Box({ object }: Props) {
 }
 
 export default Box;
-
-// export default React.memo(Box, (prevProps, nextProps) => {
-// return prevProps.object?.value === nextProps.object?.value;
-// });

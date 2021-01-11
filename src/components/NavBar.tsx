@@ -17,7 +17,7 @@ const swapTheme = (to: string) => {
 function ThemeSwitcher() {
   return (
     <div
-      className="absolute right-0 top-0 m-1 p-1 text-primary bg-secondary border border-solid border-green-400 shadow-xl cursor-pointer select-none"
+      className="absolute right-0 top-0 m-1 p-1 text-primary bg-secondary border border-solid border-green-400 shadow-xl invisible cursor-pointer select-none sm:visible"
       onClick={() => {
         if (document.body.classList.contains("light-theme")) {
           swapTheme("dark-theme");
