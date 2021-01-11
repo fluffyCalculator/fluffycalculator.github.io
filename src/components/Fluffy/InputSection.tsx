@@ -16,7 +16,7 @@ const TrueFalseButton = ({
 }) => {
   const [isActive, setIsActive] = useState(active);
 
-  let colorClasses: string;
+  let colorClasses: string = "";
 
   if (colors) {
     if (isActive) {
@@ -57,10 +57,10 @@ function InputSection({ index, instance, universe, renderParent }: Props) {
   console.log("rendered Input Section", index);
   // console.log(instance);
 
-  const handleInput = (e) => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target: HTMLInputElement = e.target;
 
-    const label = target.labels[0].innerText;
+    const label = target.labels![0].innerText;
     const value = target.value;
 
     instance.changeVar(label, value);
@@ -71,7 +71,7 @@ function InputSection({ index, instance, universe, renderParent }: Props) {
     }
   };
 
-  const handleClick = (type) => {
+  const handleClick = (type: string) => {
     if (type === "Instant Updating") {
       instance.instantUpdating = !instance.instantUpdating;
       instance.saveLocalStorage();
@@ -97,7 +97,7 @@ function InputSection({ index, instance, universe, renderParent }: Props) {
     <>
       <div
         className="grid gap-4 grid-cols-2 items-end mt-4 w-full"
-        onChange={(e) => handleInput(e)}
+        onChange={(e) => handleInput(e as React.ChangeEvent<HTMLInputElement>)}
         key={instance.universe}
       >
         {/* U1 */}

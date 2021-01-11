@@ -31,6 +31,16 @@ const prestigeExpModifier = 5;
 const baseFirstLevel = 1000;
 const maxEvolution = 10;
 
+export interface displayData {
+  xpPerRun: number;
+  currentZone: number;
+  table: [number[]];
+  percentToLevel: number;
+  bonesToLevel: number;
+  XPhr: number;
+  name: string;
+}
+
 export class fluffyInstance {
   string: string;
 
@@ -67,6 +77,16 @@ export class fluffyInstance {
 
   portal: Portal;
 
+  displayData: displayData = {
+    xpPerRun: 0,
+    currentZone: 0,
+    table: [[]],
+    percentToLevel: 0,
+    bonesToLevel: 0,
+    XPhr: 0,
+    name: "init",
+  };
+
   save = {
     fluffyExp: 0,
     fluffyExp2: 0,
@@ -79,23 +99,13 @@ export class fluffyInstance {
     heirloomBonus: 0,
   };
 
-  displayData = {
-    xpPerRun: 0,
-    currentZone: 0,
-    table: [],
-    percentToLevel: 0,
-    bonesToLevel: 0,
-    XPhr: 0,
-    name: "init",
-  };
-
   atMaxEvo = () => {
     if (this.universe === 2) return true;
     if (this.evolution === maxEvolution) return true;
     return false;
   };
 
-  getLevel = (evolution, exp) => {
+  getLevel = (evolution: number, exp: number) => {
     return Math.floor(
       Math.log((exp / this.getFirstLevel(evolution)) * (growth - 1) + 1) /
         Math.log(growth)
@@ -170,7 +180,7 @@ export class fluffyInstance {
     return 50;
   };
 
-  xpFromZone = (start: number, end: number) => {
+  xpFromZone = (start: number, end: number): number => {
     const minimumZone = this.getMinZoneForExp();
     // If ending before you're actually allowed to get xp then return nothing.
     let mcalc1: number, mcalc2: number;
@@ -252,7 +262,7 @@ export class fluffyInstance {
     }
   };
 
-  getTableCell = (evolution: number, level: number, prevRuns?: number) => {
+  getTableCell = (evolution: number, level: number, prevRuns: number) => {
     if (this.evolution === evolution && this.level > level) {
       return 0;
     }
@@ -269,6 +279,7 @@ export class fluffyInstance {
 
   getTableData = () => {
     let evolution = this.evolution;
+
     this.displayData.xpPerRun = Math.round(
       this.xpFromZone(0, this.zoneYouPortal)
     );
@@ -291,7 +302,7 @@ export class fluffyInstance {
       }
     }
 
-    return data;
+    return data as [number[]];
   };
 
   updateUniverse = (universe: number) => {

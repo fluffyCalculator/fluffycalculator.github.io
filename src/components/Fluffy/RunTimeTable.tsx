@@ -4,7 +4,7 @@ interface Props {
   data: {
     evolution: number;
     level: number;
-    table: number[];
+    table: [number[]];
   };
   second: boolean;
   time?: number;
@@ -35,34 +35,36 @@ function RunTimeTable({ data, second, time }: Props): ReactElement {
           <tr className="bg-thirdary">
             <th className="cell">🍑</th>
             <th className="cell">{`Runs to E${data.evolution}`}</th>
-            {time > 0 && (
+            {time! > 0 && (
               <th className="cell">{`Time to E${data.evolution}`}</th>
             )}
             {second && (
               <th className="cell">{`Runs to E${data.evolution + 1}`}</th>
             )}
-            {second && time > 0 && (
+            {second && time! > 0 && (
               <th className="cell">{`Time to E${data.evolution + 1}`}</th>
             )}
           </tr>
         </thead>
         <tbody>
-          {data.table.map((x, idx) => {
+          {data.table.map((cell, idx) => {
             return (
               <tr className="hover:bg-thirdary" key={idx}>
                 <td className="cell font-bold bg-thirdary">{`L${idx + 1}`}</td>
-                <td className="cell">{x[0] === 0 ? "" : x[0].toFixed(2)}</td>
-                {time > 0 && (
+                <td className="cell">
+                  {cell[0] === 0 ? "" : cell[0].toFixed(2)}
+                </td>
+                {time! > 0 && (
                   <td className="cell">
-                    {x[0] === 0 ? "" : sformat(x[0] * time * 60)}
+                    {cell[0] === 0 ? "" : sformat(cell[0] * time! * 60)}
                   </td>
                 )}
 
-                {x[1] !== undefined && (
+                {cell[1] !== undefined && (
                   <>
-                    <td className="cell">{x[1].toFixed(2)}</td>
-                    {time > 0 && (
-                      <td className="cell">{sformat(x[1] * time * 60)}</td>
+                    <td className="cell">{cell[1].toFixed(2)}</td>
+                    {time! > 0 && (
+                      <td className="cell">{sformat(cell[1] * time! * 60)}</td>
                     )}
                   </>
                 )}

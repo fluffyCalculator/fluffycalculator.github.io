@@ -1,10 +1,10 @@
 import React, { ReactElement } from "react";
-import { fluffyInstance } from "../../calculators/fluffy";
+import { displayData } from "../../calculators/fluffy";
 import { MemoInput as Input } from "../utils/Input";
 import Label from "../utils/Label";
 
 interface Props {
-  data: fluffyInstance["displayData"];
+  data: displayData;
 }
 
 function Stats({ data }: Props): ReactElement {
@@ -70,6 +70,6 @@ function Stats({ data }: Props): ReactElement {
 
 export default Stats;
 
-function addCommas(x) {
+function addCommas(x: number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

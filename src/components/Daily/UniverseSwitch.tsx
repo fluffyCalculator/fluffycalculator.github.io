@@ -7,8 +7,8 @@ declare const window: any;
 function UniverseSwitch() {
   const { forceDailies } = useContext(DailyContext);
 
-  const handleClick = (e) => {
-    let clickedNumber = Number(e.target.title);
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    let clickedNumber = Number((e.target as HTMLDivElement).title);
     if (window.daily_universe === clickedNumber) {
       return;
     } else {

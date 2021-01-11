@@ -12,12 +12,12 @@ function Fluffy() {
   return (
     <>
       <div className="p-5">
-        {shown.map((x, index) => {
+        {shown!.map((x, index) => {
           return (
             <Template
               index={index}
               key={index}
-              instance={fluffyInstances[index]}
+              instance={fluffyInstances![index]}
             />
           );
         })}
@@ -26,7 +26,7 @@ function Fluffy() {
         <div
           className="w-32 h-32 text-primary text-9xl cursor-pointer select-none"
           onClick={() => {
-            anotherInstance();
+            anotherInstance!();
           }}
         >
           +

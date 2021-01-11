@@ -8,8 +8,8 @@ function UniverseSwitch({
   onClick: (u: number) => void;
   universe: number;
 }) {
-  const handleClick = (e) => {
-    let clickedNumber = Number(e.target.title);
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    let clickedNumber = Number((e.target as HTMLDivElement).title);
     onClick(clickedNumber);
   };
 

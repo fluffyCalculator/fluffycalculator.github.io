@@ -1,40 +1,11 @@
-// import React, { useEffect, useState } from "react";
-// import { fluffyInstance, handle_paste } from "../../calculators/fluffy";
-
-// export default function Template({ index }) {
-//   const [data, updateData] = useState({ ins: new fluffyInstance() });
-
-//   // const getPaste = (e) => {
-//   //   let save = handle_paste(e);
-//   //   if (save === false) return;
-//   //   updateData((old) => {
-//   //     return {
-//   //       ins: old.ins.updateSave(save),
-//   //     };
-//   //   });
-//   //   return;
-//   // };
-
-//   useEffect(()=>{
-//     return()=>{
-//       console.log('UNMOUNTED');
-//     }
-//   })
-
-//   return (
-//     <>
-//       <textarea
-//         onPaste={(e) => {
-//           getPaste(e);
-//         }}
-//       ></textarea>
-//       <p>{data.ins.currentExp}</p> - {Math.random()} <br />
-//     </>
-//   );
-// }
-
 import clsx from "clsx";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { fluffyInstance, handle_paste } from "../../calculators/fluffy";
 import { testSave1 } from "../../testsaves/one";
 import Button from "../utils/Button";
@@ -45,9 +16,15 @@ import UniverseSwitch from "./UniverseSwitch";
 
 // This keeps all update props.
 
-function SaveBox({ onPaste, save }: { onPaste: (e) => void; save?: string }) {
+function SaveBox({
+  onPaste,
+  save,
+}: {
+  onPaste: (e: React.ClipboardEvent<HTMLTextAreaElement>) => void;
+  save?: string;
+}) {
   const [show, setShow] = useState(true);
-  const textRef = useRef(null);
+  const textRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
   return (
     <>
       {save && show && (
@@ -103,6 +80,7 @@ function Template({
 
   const changeUniverse = useCallback(
     (universe: number) => {
+      console.log("in this DDDD");
       if (universe === instance.universe) return;
 
       instance.updateUniverse(universe);
@@ -110,10 +88,10 @@ function Template({
       instance.updateDisplayData();
       forceRefresh();
     },
-    [forceRefresh]
+    [instance, forceRefresh]
   );
 
-  const getPaste = (e) => {
+  const getPaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
     let save = handle_paste(e);
     if (save === false) return;
     instance.pasteSaveActions(save.game);
