@@ -10,6 +10,7 @@ import { fluffyInstance, handle_paste } from "../../calculators/fluffy";
 import { testSave1 } from "../../testsaves/one";
 import Button from "../utils/Button";
 import InputSection from "./InputSection";
+import LevelUpTable from "./LevelUpTable";
 import RunTimeTable from "./RunTimeTable";
 import Stats from "./Stats";
 import UniverseSwitch from "./UniverseSwitch";
@@ -148,6 +149,11 @@ function Template({
                 <Stats data={instance.displayData} />
               </div>
             </div>
+            {Object.keys(instance.displayData.levelUpTable).length > 0 && (
+              <div className="col-span-1 m-auto sm:col-span-2 md:col-span-4 xl:col-span-10">
+                <LevelUpTable table={instance.displayData.levelUpTable} />
+              </div>
+            )}
           </>
         )}
       </div>

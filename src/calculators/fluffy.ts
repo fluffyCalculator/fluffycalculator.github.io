@@ -35,6 +35,7 @@ export interface displayData {
   xpPerRun: number;
   currentZone: number;
   table: [number[]];
+  levelUpTable: {};
   percentToLevel: number;
   bonesToLevel: number;
   XPhr: number;
@@ -46,7 +47,6 @@ export class fluffyInstance {
 
   name = "init"; // getUniverseChange
   firstLevel = 1000;
-  expInLevel = 0;
   level = 0; // getLevel
 
   iceBonus = 0;
@@ -81,6 +81,7 @@ export class fluffyInstance {
     xpPerRun: 0,
     currentZone: 0,
     table: [[]],
+    levelUpTable: {},
     percentToLevel: 0,
     bonesToLevel: 0,
     XPhr: 0,
@@ -150,7 +151,7 @@ export class fluffyInstance {
 
   getUpgradeExp = (evolution: number, level: number, expInLevel: number) => {
     if (level === 10) {
-      return expInLevel;
+      return this.currentExp;
     }
     return Math.floor(
       this.firstLevel *
@@ -305,6 +306,60 @@ export class fluffyInstance {
     return data as [number[]];
   };
 
+  getLevelUpTable = (): Partial<{ [key: string]: number }> => {
+    let evolution = this.evolution;
+    let level = this.level;
+
+    let zone = this.universe === this.save.zone[0] ? this.save.zone[1] : 0;
+
+    let data = {};
+
+    let maxZone = this.zoneYouPortal + 100;
+    let zoneLastLeveled = zone;
+
+    // prettier-ignore
+    const currentRelativeExp = this.evolution === evolution ? this.currentExp : 0;
+    // prettier-ignore
+    let neededExpForLevel = this.getUpgradeExp(evolution, level, currentRelativeExp);
+    if (
+      this.xpFromZone(zoneLastLeveled, maxZone) >
+      neededExpForLevel - currentRelativeExp
+    ) {
+      for (var z = zone; z < maxZone; z++) {
+        let collectedExp = this.xpFromZone(zoneLastLeveled, z + 1);
+        if (collectedExp >= neededExpForLevel) {
+          zoneLastLeveled = z;
+
+          if (level === 9) {
+            if (this.universe === 1 && evolution === maxEvolution) break;
+            evolution++;
+            level = 0;
+          } else {
+            level++;
+          }
+
+          let key: string;
+          if (this.universe === 2) {
+            key = "";
+          } else {
+            key = `E${evolution}`;
+          }
+
+          key += `L${level}`;
+
+          data = { ...data, [key]: z };
+
+          // prettier-ignore
+          neededExpForLevel = this.getUpgradeExp(evolution, level, currentRelativeExp);
+        } else {
+          continue;
+        }
+      }
+    }
+    console.log("data", data);
+    return data;
+  };
+
   updateUniverse = (universe: number) => {
     this.universe = universe;
     this.name = universe === 1 ? "Fluffy" : "Scruffy";
@@ -349,6 +404,7 @@ export class fluffyInstance {
     this.displayData = {
       xpPerRun: xpPerRun,
       table: this.getTableData(),
+      levelUpTable: this.getLevelUpTable(),
       currentZone: currentZone,
       percentToLevel: Number(
         ((this.currentExp / neededExpForLevel) * 100).toFixed(2)
@@ -392,6 +448,8 @@ export class fluffyInstance {
       gameSave.talents.fluffyAbility.purchased;
 
     this.traps = extend(true, {}, gameSave.playerSpire.traps.Knowledge);
+
+    this.graphNextIce = gameSave.global.uberNature === "Ice";
 
     this.iceBonus =
       this.universe === 1 ? 1 + 0.0025 * gameSave.empowerments.Ice.level : 1;

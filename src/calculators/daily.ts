@@ -1,21 +1,5 @@
 import { dailyModifiers } from "./main";
 
-var months = [
-  "Spacer",
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
 var mods = {
   empower: "E",
   explosive: "e",

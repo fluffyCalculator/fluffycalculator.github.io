@@ -195,17 +195,19 @@ function InputSection({ index, instance, universe, renderParent }: Props) {
               </>
             )}
 
-            {/* This is a yes/no button */}
-            <Label>
-              Ice Enlightenment
-              <MemoTrueFalseButton
-                colors={false}
-                active={instance.graphNextIce}
-                onClick={() => {
-                  handleClick("Ice");
-                }}
-              />
-            </Label>
+            {universe === 1 && (
+              <Label>
+                Ice Enlightenment
+                <MemoTrueFalseButton
+                  colors={false}
+                  active={instance.graphNextIce}
+                  onClick={() => {
+                    handleClick("Ice");
+                  }}
+                />
+              </Label>
+            )}
+
             <hr className="col-span-2 m-auto w-3/4 border-accent" />
 
             <Label>
