@@ -205,6 +205,17 @@ function InputSection({ index, instance, universe, renderParent }: Props) {
               </Label>
             )}
 
+            {universe === 2 && (
+              <Label>
+                Average Worshippers
+                <Input
+                  variant="fluffy"
+                  max={50}
+                  defaultValue={instance.averageWorshippers}
+                />
+              </Label>
+            )}
+
             <hr className="col-span-2 m-auto w-3/4 border-accent" />
 
             <Label>

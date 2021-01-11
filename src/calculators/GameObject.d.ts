@@ -40,7 +40,7 @@ export interface Global {
   world: number;
   universe: number;
   gridArray?: GridArrayEntity[] | null;
-  mapGridArray?: null[] | null;
+  mapGridArray?: MapGridArrayEntity[] | null;
   mapsOwnedArray?: MapsOwnedArrayEntity[] | null;
   currentMapId: string;
   lastClearedCell: number;
@@ -192,7 +192,7 @@ export interface Global {
   spentEssence: number;
   skeleSeed: number;
   decayDone: boolean;
-  dailyChallenge: DailyChallenge;
+  dailyChallenge: Challenges;
   recentDailies?: number[] | null;
   dailyHelium: number;
   breedTime: number;
@@ -210,19 +210,19 @@ export interface Global {
   archThresh: number;
   trackedAchieve?: null;
   mayhemCompletions: number;
-  perkPresetU1: PerkPresetU1;
-  perkPresetU2: PerkPresetU2;
+  perkPresetU1: PerkPresetU1OrPerkPresetU2;
+  perkPresetU2: PerkPresetU1OrPerkPresetU2;
   improvedAutoStorage: boolean;
   firstCustomAmt: number;
   firstCustomExact: number;
   autoGolden: number;
   autoGoldenU2: number;
   autoStructureSetting: AutoStructureSetting;
-  autoStructureSettingU2: StoryOrNoticesOrAutoStructureSettingU2OrAutoJobsSettingU2OrAutoEquipSettingU2;
+  autoStructureSettingU2: AutoStructureSettingU2;
   autoJobsSetting: AutoJobsSetting;
-  autoJobsSettingU2: StoryOrNoticesOrAutoStructureSettingU2OrAutoJobsSettingU2OrAutoEquipSettingU2;
-  autoEquipSetting: AutoEquipSetting;
-  autoEquipSettingU2: StoryOrNoticesOrAutoStructureSettingU2OrAutoJobsSettingU2OrAutoEquipSettingU2;
+  autoJobsSettingU2: AutoJobsSettingU2;
+  autoEquipSetting: AutoEquipSettingOrAutoEquipSettingU2;
+  autoEquipSettingU2: AutoEquipSettingOrAutoEquipSettingU2;
   autoEquipUnlocked: boolean;
   passive: boolean;
   spiresCompleted: number;
@@ -264,8 +264,8 @@ export interface Global {
   hazShieldCredit: number;
   zoneRes?: number[] | null;
   lastHeirlooms: LastHeirlooms;
-  mapPresets: MapPresets;
-  mapPresets2: MapPresets2;
+  mapPresets: MapPresetsOrMapPresets2;
+  mapPresets2: MapPresetsOrMapPresets2;
   lootAvgs: LootAvgs;
   menu: Menu;
   messages: Messages;
@@ -280,12 +280,16 @@ export interface GridArrayEntity {
   special: string;
   text: string;
   name: string;
-  mutation?: string | null;
-  corrupted?: string | null;
-  plaguebringer?: number | null;
-  plagueHits?: number | null;
+}
+export interface MapGridArrayEntity {
+  level: number;
+  maxHealth: number;
+  health: number;
+  attack: number;
+  special: string;
+  text: string;
+  name: string;
   OKcount?: number | null;
-  overkilled?: boolean | null;
 }
 export interface MapsOwnedArrayEntity {
   id: string;
@@ -298,8 +302,6 @@ export interface MapsOwnedArrayEntity {
   loot: number;
   noRecycle: boolean;
   bonus?: string | null;
-  voidBuff?: string | null;
-  stacked?: number | null;
 }
 export interface HeirloomsExtraEntity {
   id: number;
@@ -382,528 +384,11 @@ export interface HeirloomsExtraEntity {
             | number
             | string
             | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
-            | string
-            | number
           )[]
         | null
       )[]
     | null;
   icon: string;
-  nuMod: number;
 }
 export interface HeirloomsCarriedEntity {
   id: number;
@@ -924,12 +409,171 @@ export interface HeirloomsCarriedEntity {
             | number
             | string
             | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
           )[]
         | null
       )[]
     | null;
   icon: string;
-  replaceSpent: number;
+  protected?: boolean | null;
+  replaceSpent?: number | null;
 }
 export interface StaffEquipped {
   id: number;
@@ -940,6 +584,8 @@ export interface StaffEquipped {
   mods?:
     | (
         | (
+            | string
+            | number
             | string
             | number
             | string
@@ -976,11 +622,14 @@ export interface ShieldEquipped {
             | number
             | string
             | number
+            | string
+            | number
           )[]
         | null
       )[]
     | null;
   icon: string;
+  protected: boolean;
   replaceSpent: number;
 }
 export interface CoreEquipped {
@@ -990,109 +639,113 @@ export interface CoreEquipped {
   repSeed: number;
   rarity: number;
   mods?:
-    | ((string | number | string | number | string | number)[] | null)[]
+    | (
+        | (
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+            | string
+            | number
+          )[]
+        | null
+      )[]
     | null;
   icon: string;
+  protected: boolean;
 }
-export interface DailyChallenge {
-  large: LargeOrFamine;
-  famine: LargeOrFamine;
-  seed: number;
-}
-export interface LargeOrFamine {
-  strength: number;
-  stacks: number;
-}
-export interface PerkPresetU1 {
-  perkPreset1: PerkPreset1;
-  perkPreset2: PerkPreset2OrPerkPreset3OrPerkPreset1OrHeliumHourOrTotalHeliumOrTotalRadonOrFluffyExpHourOrTotalPortalsOrTotalRadPortalsOrHighestLevelOrHighestRadLevelOrOccupiedBy;
-  perkPreset3: PerkPreset2OrPerkPreset3OrPerkPreset1OrHeliumHourOrTotalHeliumOrTotalRadonOrFluffyExpHourOrTotalPortalsOrTotalRadPortalsOrHighestLevelOrHighestRadLevelOrOccupiedBy;
-}
-export interface PerkPreset1 {
-  Carpentry: number;
-  Artisanistry: number;
-  Range: number;
-  Agility: number;
-  Bait: number;
-  Trumps: number;
-  Pheromones: number;
-  Packrat: number;
-  Motivation: number;
-  Power: number;
-  Toughness: number;
-  Looting: number;
-}
-export interface PerkPreset2OrPerkPreset3OrPerkPreset1OrHeliumHourOrTotalHeliumOrTotalRadonOrFluffyExpHourOrTotalPortalsOrTotalRadPortalsOrHighestLevelOrHighestRadLevelOrOccupiedBy {}
-export interface PerkPresetU2 {
-  perkPreset1: PerkPreset2OrPerkPreset3OrPerkPreset1OrHeliumHourOrTotalHeliumOrTotalRadonOrFluffyExpHourOrTotalPortalsOrTotalRadPortalsOrHighestLevelOrHighestRadLevelOrOccupiedBy;
-  perkPreset2: PerkPreset2OrPerkPreset3OrPerkPreset1OrHeliumHourOrTotalHeliumOrTotalRadonOrFluffyExpHourOrTotalPortalsOrTotalRadPortalsOrHighestLevelOrHighestRadLevelOrOccupiedBy;
-  perkPreset3: PerkPreset2OrPerkPreset3OrPerkPreset1OrHeliumHourOrTotalHeliumOrTotalRadonOrFluffyExpHourOrTotalPortalsOrTotalRadPortalsOrHighestLevelOrHighestRadLevelOrOccupiedBy;
+export interface Challenges {}
+export interface PerkPresetU1OrPerkPresetU2 {
+  perkPreset1: Challenges;
+  perkPreset2: Challenges;
+  perkPreset3: Challenges;
 }
 export interface AutoStructureSetting {
   enabled: boolean;
-  Hut: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  House: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Mansion: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Hotel: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Resort: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Gateway: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Collector: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Warpstation: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Gym: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Tribute: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Nursery: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Gigastation: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Wormhole: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Hut: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  House: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Mansion: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Hotel: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Resort: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Gateway: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Collector: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Gym: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Nursery: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Wormhole: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Tribute: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Warpstation: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Gigastation: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
   NurseryZones: string;
 }
-export interface HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson {
+export interface HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson {
   enabled: boolean;
   value: string;
   buyMax: number;
 }
-export interface StoryOrNoticesOrAutoStructureSettingU2OrAutoJobsSettingU2OrAutoEquipSettingU2 {
+export interface AutoStructureSettingU2 {
   enabled: boolean;
+  Hut: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  House: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Mansion: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Hotel: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Resort: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Gateway: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Collector: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Smithy: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Tribute: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
 }
 export interface AutoJobsSetting {
   enabled: boolean;
-  Farmer: FarmerOrLumberjackOrMiner;
-  Explorer: ExplorerOrMagmamancerOrTrainer;
-  Lumberjack: FarmerOrLumberjackOrMiner;
-  Magmamancer: ExplorerOrMagmamancerOrTrainer;
-  Miner: FarmerOrLumberjackOrMiner;
-  Trainer: ExplorerOrMagmamancerOrTrainer;
-  Scientist: Scientist;
+  Explorer: ExplorerOrTrainerOrMagmamancerOrMeteorologist;
+  Trainer: ExplorerOrTrainerOrMagmamancerOrMeteorologist;
   portalGather: string;
+  Farmer: FarmerOrLumberjackOrMiner;
+  Lumberjack: FarmerOrLumberjackOrMiner;
+  Miner: FarmerOrLumberjackOrMiner;
+  Scientist: Scientist;
+  Magmamancer: ExplorerOrTrainerOrMagmamancerOrMeteorologist;
+}
+export interface ExplorerOrTrainerOrMagmamancerOrMeteorologist {
+  enabled: boolean;
+  value: number;
+  buyMax: number;
 }
 export interface FarmerOrLumberjackOrMiner {
   enabled: boolean;
   ratio: number;
-}
-export interface ExplorerOrMagmamancerOrTrainer {
-  enabled: boolean;
-  value: number;
-  buyMax: number;
 }
 export interface Scientist {
   enabled: boolean;
   ratio: number;
   buyMax: number;
 }
-export interface AutoEquipSetting {
+export interface AutoJobsSettingU2 {
   enabled: boolean;
-  Shield: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Dagger: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Boots: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Mace: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Helmet: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Polearm: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Pants: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Battleaxe: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Shoulderguards: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Greatsword: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Breastplate: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Arbalest: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
-  Gambeson: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrWarpstationOrGymOrTributeOrNurseryOrGigastationOrWormholeOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Farmer: FarmerOrLumberjackOrMiner;
+  Lumberjack: FarmerOrLumberjackOrMiner;
+  Miner: FarmerOrLumberjackOrMiner;
+  Scientist: Scientist;
+  portalGather: string;
+  Explorer: ExplorerOrTrainerOrMagmamancerOrMeteorologist;
+  Meteorologist: ExplorerOrTrainerOrMagmamancerOrMeteorologist;
+}
+export interface AutoEquipSettingOrAutoEquipSettingU2 {
+  enabled: boolean;
+  Shield: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Dagger: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Boots: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Mace: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Helmet: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Polearm: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Pants: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Battleaxe: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Shoulderguards: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Greatsword: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Breastplate: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Arbalest: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
+  Gambeson: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrGymOrNurseryOrWormholeOrTributeOrWarpstationOrGigastationOrSmithyOrShieldOrDaggerOrBootsOrMaceOrHelmetOrPolearmOrPantsOrBattleaxeOrShoulderguardsOrGreatswordOrBreastplateOrArbalestOrGambeson;
   highestTier: boolean;
 }
 export interface LastHeirlooms {
@@ -1103,7 +756,7 @@ export interface U1OrU2 {
   Shield: number;
   Staff: number;
 }
-export interface MapPresets {
+export interface MapPresetsOrMapPresets2 {
   p1: P1OrP2OrP3OrP4OrP5;
   p2: P1OrP2OrP3OrP4OrP5;
   p3: P1OrP2OrP3OrP4OrP5;
@@ -1119,23 +772,6 @@ export interface P1OrP2OrP3OrP4OrP5 {
   perf: boolean;
   extra: number;
   offset: number;
-}
-export interface MapPresets2 {
-  p1: P1OrP2OrP3OrP4OrP51;
-  p2: P1OrP2OrP3OrP4OrP51;
-  p3: P1OrP2OrP3OrP4OrP51;
-  p4: P1OrP2OrP3OrP4OrP51;
-  p5: P1OrP2OrP3OrP4OrP51;
-}
-export interface P1OrP2OrP3OrP4OrP51 {
-  loot: number;
-  difficulty: number;
-  size: number;
-  biome: string;
-  specMod: string;
-  perf: boolean;
-  extra: number;
-  offset: string;
 }
 export interface LootAvgs {
   food: FoodOrWoodOrMetalOrGemsOrFragmentsOrScience;
@@ -1155,11 +791,14 @@ export interface Menu {
   upgrades: boolean;
 }
 export interface Messages {
-  Story: StoryOrNoticesOrAutoStructureSettingU2OrAutoJobsSettingU2OrAutoEquipSettingU2;
+  Story: StoryOrNotices;
   Loot: Loot;
   Unlocks: Unlocks1;
   Combat: Combat;
-  Notices: StoryOrNoticesOrAutoStructureSettingU2OrAutoJobsSettingU2OrAutoEquipSettingU2;
+  Notices: StoryOrNotices;
+}
+export interface StoryOrNotices {
+  enabled: boolean;
 }
 export interface Loot {
   enabled: boolean;
@@ -1217,63 +856,64 @@ export interface Options {
   menu: Menu1;
 }
 export interface Menu1 {
-  autoSave: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  usePlayFab: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  standardNotation: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  tooltips: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  tooltipPosition: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  queueAnimation: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  barOutlines: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  menuFormatting: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  formatPerkLevels: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  smallPerks: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  progressBars: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  confirmhole: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  lockOnUnlock: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  achievementPopups: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  mapLoot: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  repeatUntil: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  exitTo: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  repeatVoids: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  boneAlerts: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  showAlerts: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  showFullBreed: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  autoSave: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  usePlayFab: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  standardNotation: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  tooltips: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  tooltipPosition: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  queueAnimation: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  barOutlines: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  menuFormatting: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  formatPerkLevels: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  smallPerks: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  progressBars: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  confirmhole: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  lockOnUnlock: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  achievementPopups: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  mapLoot: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  repeatUntil: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  exitTo: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  repeatVoids: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  boneAlerts: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  showAlerts: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  showFullBreed: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
   darkTheme: DarkTheme;
-  fadeIns: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  extraStats: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  useAverages: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  voidPopups: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  detailedPerks: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  alwaysAbandon: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  extraMapBtns: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  fadeIns: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  extraStats: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  useAverages: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  voidPopups: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  detailedPerks: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  alwaysAbandon: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  extraMapBtns: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
   GeneticistassistTarget: GeneticistassistTarget;
-  liquification: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  overkillColor: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  forceQueue: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  mapsOnSpire: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  liquification: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  overkillColor: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  forceQueue: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  mapsOnSpire: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
   mapAtZone: MapAtZone;
-  timestamps: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  gaFire: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  tinyButtons: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  masteryTab: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  bigPopups: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  generatorStart: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  showHoliday: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  geneSend: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  fireForJobs: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  ctrlGigas: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  showHeirloomAnimations: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  hotkeys: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  climbBw: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  offlineProgress: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  archAutomator: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  hideCompleteAchieves: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  saveOnPause: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  timestamps: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  gaFire: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  tinyButtons: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  masteryTab: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  bigPopups: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  generatorStart: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  showSnow: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  showHoliday: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  geneSend: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  fireForJobs: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  ctrlGigas: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  showHeirloomAnimations: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  hotkeys: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  climbBw: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  offlineProgress: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  archAutomator: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  hideCompleteAchieves: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  saveOnPause: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
   pauseGame: PauseGame;
-  disablePause: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
-  deleteSave: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  disablePause: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
+  deleteSave: AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave;
 }
-export interface AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave {
+export interface AutoSaveOrUsePlayFabOrStandardNotationOrTooltipsOrTooltipPositionOrQueueAnimationOrBarOutlinesOrMenuFormattingOrFormatPerkLevelsOrSmallPerksOrProgressBarsOrConfirmholeOrLockOnUnlockOrAchievementPopupsOrMapLootOrRepeatUntilOrExitToOrRepeatVoidsOrBoneAlertsOrShowAlertsOrShowFullBreedOrFadeInsOrExtraStatsOrUseAveragesOrVoidPopupsOrDetailedPerksOrAlwaysAbandonOrExtraMapBtnsOrLiquificationOrOverkillColorOrForceQueueOrMapsOnSpireOrTimestampsOrGaFireOrTinyButtonsOrMasteryTabOrBigPopupsOrGeneratorStartOrShowSnowOrShowHolidayOrGeneSendOrFireForJobsOrCtrlGigasOrShowHeirloomAnimationsOrHotkeysOrClimbBwOrOfflineProgressOrArchAutomatorOrHideCompleteAchievesOrSaveOnPauseOrDisablePauseOrDeleteSave {
   enabled: number;
 }
 export interface DarkTheme {
@@ -1286,14 +926,22 @@ export interface GeneticistassistTarget {
 }
 export interface MapAtZone {
   enabled: number;
-  setZone?: SetZoneEntity[] | null;
-  setZoneB?: SetZoneBEntityOrSetZoneU2BEntity[] | null;
-  setZoneU2?: SetZoneU2Entity[] | null;
-  setZoneU2B?: SetZoneBEntityOrSetZoneU2BEntity[] | null;
+  setZone?:
+    | SetZoneEntityOrSetZoneBEntityOrSetZoneU2EntityOrSetZoneU2BEntity[]
+    | null;
+  setZoneB?:
+    | SetZoneEntityOrSetZoneBEntityOrSetZoneU2EntityOrSetZoneU2BEntity[]
+    | null;
+  setZoneU2?:
+    | SetZoneEntityOrSetZoneBEntityOrSetZoneU2EntityOrSetZoneU2BEntity[]
+    | null;
+  setZoneU2B?:
+    | SetZoneEntityOrSetZoneBEntityOrSetZoneU2EntityOrSetZoneU2BEntity[]
+    | null;
   U1Mode: string;
   U2Mode: string;
 }
-export interface SetZoneEntity {
+export interface SetZoneEntityOrSetZoneBEntityOrSetZoneU2EntityOrSetZoneU2BEntity {
   world: number;
   cell: number;
   check: boolean;
@@ -1304,18 +952,6 @@ export interface SetZoneEntity {
   bwWorld: number;
   times: number;
   on: boolean;
-}
-export interface SetZoneBEntityOrSetZoneU2BEntity {
-  world: number;
-}
-export interface SetZoneU2Entity {
-  world: number;
-  check: boolean;
-  preset: number;
-  repeat: number;
-  until: number;
-  exit: number;
-  bwWorld: number;
 }
 export interface PauseGame {
   enabled: number;
@@ -1392,18 +1028,18 @@ export interface Portal {
   Motivation_II: LootingIIOrCarpentryIIOrMotivationIIOrPowerIIOrToughnessII;
   Power_II: LootingIIOrCarpentryIIOrMotivationIIOrPowerIIOrToughnessII;
   Toughness_II: LootingIIOrCarpentryIIOrMotivationIIOrPowerIIOrToughnessII;
-  Capable: PerkProps;
-  Cunning: PerkProps;
-  Curious: PerkProps;
-  Classy: PerkProps;
+  Capable: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
+  Cunning: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
+  Curious: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
+  Classy: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
   Overkill: OverkillOrResilienceOrCarpentryOrArtisanistryOrRangeOrAgilityOrBaitOrTrumpsOrPheromonesOrPackratOrMotivationOrPowerOrToughnessOrLooting;
-  Resourceful: PerkProps;
+  Resourceful: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
   Coordinated: Coordinated;
-  Siphonology: PerkProps;
-  Anticipation: PerkProps;
+  Siphonology: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
+  Anticipation: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
   Resilience: OverkillOrResilienceOrCarpentryOrArtisanistryOrRangeOrAgilityOrBaitOrTrumpsOrPheromonesOrPackratOrMotivationOrPowerOrToughnessOrLooting;
-  Meditation: PerkProps;
-  Relentlessness: PerkProps;
+  Meditation: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
+  Relentlessness: CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness;
   Greed: GreedOrCriticalityOrPrismal;
   Tenacity: Tenacity;
   Criticality: GreedOrCriticalityOrPrismal;
@@ -1423,6 +1059,7 @@ export interface Portal {
   Prismal: GreedOrCriticalityOrPrismal;
   Hunger: Hunger;
   Frenzy: Frenzy;
+  Observation: Observation;
 }
 export interface LootingIIOrCarpentryIIOrMotivationIIOrPowerIIOrToughnessII {
   level: number;
@@ -1430,7 +1067,7 @@ export interface LootingIIOrCarpentryIIOrMotivationIIOrPowerIIOrToughnessII {
   heliumSpent: number;
   additive: boolean;
 }
-export interface PerkProps {
+export interface CapableOrCunningOrCuriousOrClassyOrResourcefulOrSiphonologyOrAnticipationOrMeditationOrRelentlessness {
   level: number;
   locked: boolean;
   heliumSpent: number;
@@ -1465,9 +1102,9 @@ export interface Equality {
   radLevel: number;
   radSpent: number;
   scalingActive: boolean;
-  scalingSetting: number;
+  scalingSetting: string;
   scalingReverse: boolean;
-  disabledStackCount: number;
+  disabledStackCount: string;
   scalingCount: number;
 }
 export interface Hunger {
@@ -1482,6 +1119,14 @@ export interface Frenzy {
   radSpent: number;
   frenzyStarted: number;
   deathless: boolean;
+}
+export interface Observation {
+  radLocked: boolean;
+  radLevel: number;
+  radSpent: number;
+  trinkets: number;
+  trinketsPerLevel: number;
+  seed: number;
 }
 export interface C2 {
   Discipline: number;
@@ -1512,13 +1157,6 @@ export interface C2 {
   Storm: number;
   Berserk: number;
 }
-export interface Challenges {
-  Daily: Daily;
-}
-export interface Daily {
-  allowU2: boolean;
-  fireAbandon: boolean;
-}
 export interface Stats {
   trimpsKilled: TrimpsKilledOrBattlesWonOrBattlesLostOrGemsCollectedOrMapsClearedOrZonesClearedOrTrimpsFiredOrSpentOnWormsOrGoldenUpgradesOrDailyBonusHeliumOrDailyBonusRadonOrZonesLiquifiedOrTotalVoidMapsOrTotalHeirloomsOrCoresFoundOrCellsOverkilledOrTrimpsGeneratedOrDecayedNurseriesOrAmalgamatorsOrTdKills;
   battlesWon: TrimpsKilledOrBattlesWonOrBattlesLostOrGemsCollectedOrMapsClearedOrZonesClearedOrTrimpsFiredOrSpentOnWormsOrGoldenUpgradesOrDailyBonusHeliumOrDailyBonusRadonOrZonesLiquifiedOrTotalVoidMapsOrTotalHeirloomsOrCoresFoundOrCellsOverkilledOrTrimpsGeneratedOrDecayedNurseriesOrAmalgamatorsOrTdKills;
@@ -1529,13 +1167,13 @@ export interface Stats {
   trimpsFired: TrimpsKilledOrBattlesWonOrBattlesLostOrGemsCollectedOrMapsClearedOrZonesClearedOrTrimpsFiredOrSpentOnWormsOrGoldenUpgradesOrDailyBonusHeliumOrDailyBonusRadonOrZonesLiquifiedOrTotalVoidMapsOrTotalHeirloomsOrCoresFoundOrCellsOverkilledOrTrimpsGeneratedOrDecayedNurseriesOrAmalgamatorsOrTdKills;
   spentOnWorms: TrimpsKilledOrBattlesWonOrBattlesLostOrGemsCollectedOrMapsClearedOrZonesClearedOrTrimpsFiredOrSpentOnWormsOrGoldenUpgradesOrDailyBonusHeliumOrDailyBonusRadonOrZonesLiquifiedOrTotalVoidMapsOrTotalHeirloomsOrCoresFoundOrCellsOverkilledOrTrimpsGeneratedOrDecayedNurseriesOrAmalgamatorsOrTdKills;
   goldenUpgrades: TrimpsKilledOrBattlesWonOrBattlesLostOrGemsCollectedOrMapsClearedOrZonesClearedOrTrimpsFiredOrSpentOnWormsOrGoldenUpgradesOrDailyBonusHeliumOrDailyBonusRadonOrZonesLiquifiedOrTotalVoidMapsOrTotalHeirloomsOrCoresFoundOrCellsOverkilledOrTrimpsGeneratedOrDecayedNurseriesOrAmalgamatorsOrTdKills;
-  heliumHour: PerkPreset2OrPerkPreset3OrPerkPreset1OrHeliumHourOrTotalHeliumOrTotalRadonOrFluffyExpHourOrTotalPortalsOrTotalRadPortalsOrHighestLevelOrHighestRadLevelOrOccupiedBy;
+  heliumHour: Challenges;
   bestHeliumHourThisRun: BestHeliumHourThisRunOrBestFluffyExpHourThisRun;
-  totalHelium: PerkPreset2OrPerkPreset3OrPerkPreset1OrHeliumHourOrTotalHeliumOrTotalRadonOrFluffyExpHourOrTotalPortalsOrTotalRadPortalsOrHighestLevelOrHighestRadLevelOrOccupiedBy;
-  bestHeliumHour: BestHeliumHourOrBestRadonHourOrBestFluffyExpHourOrBestFluffyExpHour2OrPlanetsBroken;
+  totalHelium: Challenges;
+  bestHeliumHour: BestHeliumHourOrBestRadonHourOrBestFluffyExpHourOrBestFluffyExpHour2OrFluffyPatsOrScruffyPatsOrPlanetsBroken;
   dailyBonusHelium: TrimpsKilledOrBattlesWonOrBattlesLostOrGemsCollectedOrMapsClearedOrZonesClearedOrTrimpsFiredOrSpentOnWormsOrGoldenUpgradesOrDailyBonusHeliumOrDailyBonusRadonOrZonesLiquifiedOrTotalVoidMapsOrTotalHeirloomsOrCoresFoundOrCellsOverkilledOrTrimpsGeneratedOrDecayedNurseriesOrAmalgamatorsOrTdKills;
-  totalRadon: PerkPreset2OrPerkPreset3OrPerkPreset1OrHeliumHourOrTotalHeliumOrTotalRadonOrFluffyExpHourOrTotalPortalsOrTotalRadPortalsOrHighestLevelOrHighestRadLevelOrOccupiedBy;
-  bestRadonHour: BestHeliumHourOrBestRadonHourOrBestFluffyExpHourOrBestFluffyExpHour2OrPlanetsBroken;
+  totalRadon: Challenges;
+  bestRadonHour: BestHeliumHourOrBestRadonHourOrBestFluffyExpHourOrBestFluffyExpHour2OrFluffyPatsOrScruffyPatsOrPlanetsBroken;
   dailyBonusRadon: TrimpsKilledOrBattlesWonOrBattlesLostOrGemsCollectedOrMapsClearedOrZonesClearedOrTrimpsFiredOrSpentOnWormsOrGoldenUpgradesOrDailyBonusHeliumOrDailyBonusRadonOrZonesLiquifiedOrTotalVoidMapsOrTotalHeirloomsOrCoresFoundOrCellsOverkilledOrTrimpsGeneratedOrDecayedNurseriesOrAmalgamatorsOrTdKills;
   zonesLiquified: TrimpsKilledOrBattlesWonOrBattlesLostOrGemsCollectedOrMapsClearedOrZonesClearedOrTrimpsFiredOrSpentOnWormsOrGoldenUpgradesOrDailyBonusHeliumOrDailyBonusRadonOrZonesLiquifiedOrTotalVoidMapsOrTotalHeirloomsOrCoresFoundOrCellsOverkilledOrTrimpsGeneratedOrDecayedNurseriesOrAmalgamatorsOrTdKills;
   highestVoidMap: HighestVoidMapOrHighestVoidMap2;
@@ -1550,15 +1188,17 @@ export interface Stats {
   amalgamators: TrimpsKilledOrBattlesWonOrBattlesLostOrGemsCollectedOrMapsClearedOrZonesClearedOrTrimpsFiredOrSpentOnWormsOrGoldenUpgradesOrDailyBonusHeliumOrDailyBonusRadonOrZonesLiquifiedOrTotalVoidMapsOrTotalHeirloomsOrCoresFoundOrCellsOverkilledOrTrimpsGeneratedOrDecayedNurseriesOrAmalgamatorsOrTdKills;
   bestFluffyExp: BestTokensOrBestFluffyExpOrBestFluffyExp2;
   bestFluffyExp2: BestTokensOrBestFluffyExpOrBestFluffyExp2;
-  fluffyExpHour: PerkPreset2OrPerkPreset3OrPerkPreset1OrHeliumHourOrTotalHeliumOrTotalRadonOrFluffyExpHourOrTotalPortalsOrTotalRadPortalsOrHighestLevelOrHighestRadLevelOrOccupiedBy;
+  fluffyExpHour: Challenges;
   bestFluffyExpHourThisRun: BestHeliumHourThisRunOrBestFluffyExpHourThisRun;
-  bestFluffyExpHour: BestHeliumHourOrBestRadonHourOrBestFluffyExpHourOrBestFluffyExpHour2OrPlanetsBroken;
-  bestFluffyExpHour2: BestHeliumHourOrBestRadonHourOrBestFluffyExpHourOrBestFluffyExpHour2OrPlanetsBroken;
-  totalPortals: PerkPreset2OrPerkPreset3OrPerkPreset1OrHeliumHourOrTotalHeliumOrTotalRadonOrFluffyExpHourOrTotalPortalsOrTotalRadPortalsOrHighestLevelOrHighestRadLevelOrOccupiedBy;
-  totalRadPortals: PerkPreset2OrPerkPreset3OrPerkPreset1OrHeliumHourOrTotalHeliumOrTotalRadonOrFluffyExpHourOrTotalPortalsOrTotalRadPortalsOrHighestLevelOrHighestRadLevelOrOccupiedBy;
-  planetsBroken: BestHeliumHourOrBestRadonHourOrBestFluffyExpHourOrBestFluffyExpHour2OrPlanetsBroken;
-  highestLevel: PerkPreset2OrPerkPreset3OrPerkPreset1OrHeliumHourOrTotalHeliumOrTotalRadonOrFluffyExpHourOrTotalPortalsOrTotalRadPortalsOrHighestLevelOrHighestRadLevelOrOccupiedBy;
-  highestRadLevel: PerkPreset2OrPerkPreset3OrPerkPreset1OrHeliumHourOrTotalHeliumOrTotalRadonOrFluffyExpHourOrTotalPortalsOrTotalRadPortalsOrHighestLevelOrHighestRadLevelOrOccupiedBy;
+  bestFluffyExpHour: BestHeliumHourOrBestRadonHourOrBestFluffyExpHourOrBestFluffyExpHour2OrFluffyPatsOrScruffyPatsOrPlanetsBroken;
+  bestFluffyExpHour2: BestHeliumHourOrBestRadonHourOrBestFluffyExpHourOrBestFluffyExpHour2OrFluffyPatsOrScruffyPatsOrPlanetsBroken;
+  fluffyPats: BestHeliumHourOrBestRadonHourOrBestFluffyExpHourOrBestFluffyExpHour2OrFluffyPatsOrScruffyPatsOrPlanetsBroken;
+  scruffyPats: BestHeliumHourOrBestRadonHourOrBestFluffyExpHourOrBestFluffyExpHour2OrFluffyPatsOrScruffyPatsOrPlanetsBroken;
+  totalPortals: Challenges;
+  totalRadPortals: Challenges;
+  planetsBroken: BestHeliumHourOrBestRadonHourOrBestFluffyExpHourOrBestFluffyExpHour2OrFluffyPatsOrScruffyPatsOrPlanetsBroken;
+  highestLevel: Challenges;
+  highestRadLevel: Challenges;
   tdKills: TrimpsKilledOrBattlesWonOrBattlesLostOrGemsCollectedOrMapsClearedOrZonesClearedOrTrimpsFiredOrSpentOnWormsOrGoldenUpgradesOrDailyBonusHeliumOrDailyBonusRadonOrZonesLiquifiedOrTotalVoidMapsOrTotalHeirloomsOrCoresFoundOrCellsOverkilledOrTrimpsGeneratedOrDecayedNurseriesOrAmalgamatorsOrTdKills;
 }
 export interface TrimpsKilledOrBattlesWonOrBattlesLostOrGemsCollectedOrMapsClearedOrZonesClearedOrTrimpsFiredOrSpentOnWormsOrGoldenUpgradesOrDailyBonusHeliumOrDailyBonusRadonOrZonesLiquifiedOrTotalVoidMapsOrTotalHeirloomsOrCoresFoundOrCellsOverkilledOrTrimpsGeneratedOrDecayedNurseriesOrAmalgamatorsOrTdKills {
@@ -1570,7 +1210,7 @@ export interface BestHeliumHourThisRunOrBestFluffyExpHourThisRun {
   atZone: number;
   noFormat: boolean;
 }
-export interface BestHeliumHourOrBestRadonHourOrBestFluffyExpHourOrBestFluffyExpHour2OrPlanetsBroken {
+export interface BestHeliumHourOrBestRadonHourOrBestFluffyExpHourOrBestFluffyExpHour2OrFluffyPatsOrScruffyPatsOrPlanetsBroken {
   valueTotal: number;
 }
 export interface HighestVoidMapOrHighestVoidMap2 {
@@ -1910,25 +1550,26 @@ export interface GemsOrAnyOrMetalOrFoodOrWood {
 }
 export interface Buildings {
   Trap: Trap;
-  Barn: Barn;
-  Shed: ShedOrForge;
-  Forge: ShedOrForge;
-  Hut: HutOrHouseOrHotelOrResortOrGatewayOrCollectorOrTribute;
-  House: HutOrHouseOrHotelOrResortOrGatewayOrCollectorOrTribute;
-  Mansion: Mansion;
-  Hotel: HutOrHouseOrHotelOrResortOrGatewayOrCollectorOrTribute;
-  Resort: HutOrHouseOrHotelOrResortOrGatewayOrCollectorOrTribute;
-  Gateway: HutOrHouseOrHotelOrResortOrGatewayOrCollectorOrTribute;
-  Wormhole: Wormhole;
-  Collector: HutOrHouseOrHotelOrResortOrGatewayOrCollectorOrTribute;
+  Barn: BarnOrShedOrForge;
+  Shed: BarnOrShedOrForge;
+  Forge: BarnOrShedOrForge;
+  Hut: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrTribute;
+  House: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrTribute;
+  Mansion: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrTribute;
+  Hotel: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrTribute;
+  Resort: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrTribute;
+  Gateway: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrTribute;
+  Wormhole: WormholeOrGym;
+  Collector: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrTribute;
   Warpstation: Warpstation;
   Hub: Hub;
-  Gym: Gym;
-  Smithy: Smithy;
-  Tribute: HutOrHouseOrHotelOrResortOrGatewayOrCollectorOrTribute;
+  Gym: WormholeOrGym;
+  Smithy: SmithyOrLaboratory;
+  Tribute: HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrTribute;
   Nursery: Nursery;
   Microchip: MicrochipOrAntenna;
   Antenna: MicrochipOrAntenna;
+  Laboratory: SmithyOrLaboratory;
 }
 export interface Trap {
   locked: number;
@@ -1936,22 +1577,14 @@ export interface Trap {
   purchased: number;
   craftTime: number;
 }
-export interface Barn {
+export interface BarnOrShedOrForge {
   locked: number;
   owned: number;
   purchased: number;
   craftTime: number;
   percent: boolean;
 }
-export interface ShedOrForge {
-  locked: number;
-  owned: number;
-  purchased: number;
-  craftTime: number;
-  percent: boolean;
-  alert: boolean;
-}
-export interface HutOrHouseOrHotelOrResortOrGatewayOrCollectorOrTribute {
+export interface HutOrHouseOrMansionOrHotelOrResortOrGatewayOrCollectorOrTribute {
   locked: number;
   owned: number;
   purchased: number;
@@ -1963,16 +1596,7 @@ export interface Increase {
   what: string;
   by: number;
 }
-export interface Mansion {
-  locked: number;
-  owned: number;
-  purchased: number;
-  craftTime: number;
-  AP: boolean;
-  increase: Increase;
-  alert: boolean;
-}
-export interface Wormhole {
+export interface WormholeOrGym {
   locked: number;
   owned: number;
   purchased: number;
@@ -1980,7 +1604,6 @@ export interface Wormhole {
   blockU2: boolean;
   AP: boolean;
   increase: Increase;
-  alert: boolean;
 }
 export interface Warpstation {
   locked: number;
@@ -2001,16 +1624,7 @@ export interface Hub {
   blockU1: boolean;
   increase: Increase;
 }
-export interface Gym {
-  locked: number;
-  owned: number;
-  purchased: number;
-  craftTime: number;
-  AP: boolean;
-  blockU2: boolean;
-  increase: Increase;
-}
-export interface Smithy {
+export interface SmithyOrLaboratory {
   locked: number;
   owned: number;
   purchased: number;
@@ -2038,11 +1652,11 @@ export interface Jobs {
   Lumberjack: FarmerOrLumberjackOrMinerOrScientistOrDragimp;
   Miner: FarmerOrLumberjackOrMinerOrScientistOrDragimp;
   Scientist: FarmerOrLumberjackOrMinerOrScientistOrDragimp;
-  Trainer: TrainerOrGeneticist;
+  Trainer: TrainerOrGeneticistOrMagmamancer;
   Explorer: Explorer;
   Dragimp: FarmerOrLumberjackOrMinerOrScientistOrDragimp;
-  Geneticist: TrainerOrGeneticist;
-  Magmamancer: Magmamancer;
+  Geneticist: TrainerOrGeneticistOrMagmamancer;
+  Magmamancer: TrainerOrGeneticistOrMagmamancer;
   Amalgamator: Amalgamator;
   Meteorologist: Meteorologist;
   Worshipper: Worshipper;
@@ -2053,7 +1667,7 @@ export interface FarmerOrLumberjackOrMinerOrScientistOrDragimp {
   increase: string;
   modifier: number;
 }
-export interface TrainerOrGeneticist {
+export interface TrainerOrGeneticistOrMagmamancer {
   locked: number;
   allowAutoFire: boolean;
   owned: number;
@@ -2067,15 +1681,6 @@ export interface Explorer {
   owned: number;
   increase: string;
   modifier: number;
-}
-export interface Magmamancer {
-  locked: number;
-  owned: number;
-  blockU2: boolean;
-  allowAutoFire: boolean;
-  increase: string;
-  modifier: number;
-  alert: boolean;
 }
 export interface Amalgamator {
   locked: number;
@@ -2104,15 +1709,15 @@ export interface Worshipper {
   increase: string;
 }
 export interface GoldenUpgrades {
-  Helium: HeliumOrVoid;
-  Battle: Battle;
-  Void: HeliumOrVoid;
+  Helium: HeliumOrBattle;
+  Battle: HeliumOrBattle;
+  Void: Void;
 }
-export interface HeliumOrVoid {
+export interface HeliumOrBattle {
   currentBonus: number;
   purchasedAt?: number[] | null;
 }
-export interface Battle {
+export interface Void {
   currentBonus: number;
   purchasedAt?: null[] | null;
 }
@@ -2122,59 +1727,59 @@ export interface Upgrades {
   radonRelic: AttackRelicOrEnemyAttackRelicOrRadonRelicOrScienceRelicOrBreedRelic;
   scienceRelic: AttackRelicOrEnemyAttackRelicOrRadonRelicOrScienceRelicOrBreedRelic;
   breedRelic: AttackRelicOrEnemyAttackRelicOrRadonRelicOrScienceRelicOrBreedRelic;
-  Coordination: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Gigastation: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Battle: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Bloodlust: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Prismatic: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Blockmaster: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Trapstorm: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Shieldblock: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Bounty: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Egg: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Prismalicious: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Anger: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Rage: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Gymystic: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
+  Coordination: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Gigastation: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Battle: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Bloodlust: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Prismatic: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Blockmaster: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Trapstorm: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Shieldblock: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Bounty: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Egg: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Prismalicious: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Anger: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Rage: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Gymystic: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
   SuperShriek: SuperShriek;
-  Formations: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Dominance: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Barrier: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Miners: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Scientists: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Trainers: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Explorers: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Magmamancers: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  UberHut: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  UberHouse: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  UberMansion: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  UberHotel: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  UberResort: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Supershield: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Dagadder: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Bootboost: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Megamace: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Hellishmet: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Polierarm: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Pantastic: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Axeidic: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Smoldershoulder: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Greatersword: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Bestplate: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Harmbalest: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  GambesOP: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Potency: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  TrainTacular: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Efficiency: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Speedminer: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Speedlumber: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Speedfarming: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Speedscience: BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience;
-  Speedexplorer: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Megaminer: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Megalumber: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Megafarming: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
-  Megascience: CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Formations: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Dominance: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Barrier: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Miners: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Scientists: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Trainers: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Explorers: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Magmamancers: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  UberHut: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  UberHouse: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  UberMansion: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  UberHotel: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  UberResort: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Supershield: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Dagadder: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Bootboost: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Megamace: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Hellishmet: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Polierarm: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Pantastic: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Axeidic: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Smoldershoulder: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Greatersword: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Bestplate: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Harmbalest: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  GambesOP: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Potency: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  TrainTacular: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Efficiency: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Speedminer: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Speedlumber: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Speedfarming: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Speedscience: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Speedexplorer: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Megaminer: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Megalumber: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Megafarming: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
+  Megascience: CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience;
 }
 export interface AttackRelicOrEnemyAttackRelicOrRadonRelicOrScienceRelicOrBreedRelic {
   name: string;
@@ -2184,13 +1789,7 @@ export interface AttackRelicOrEnemyAttackRelicOrRadonRelicOrScienceRelicOrBreedR
   done: number;
   allowed: number;
 }
-export interface CoordinationOrGigastationOrTrapstormOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience {
-  locked: number;
-  done: number;
-  allowed: number;
-  alert: boolean;
-}
-export interface BattleOrBloodlustOrPrismaticOrBlockmasterOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscience {
+export interface CoordinationOrGigastationOrBattleOrBloodlustOrPrismaticOrBlockmasterOrTrapstormOrShieldblockOrBountyOrEggOrPrismaliciousOrAngerOrRageOrGymysticOrFormationsOrDominanceOrBarrierOrMinersOrScientistsOrTrainersOrExplorersOrMagmamancersOrUberHutOrUberHouseOrUberMansionOrUberHotelOrUberResortOrSupershieldOrDagadderOrBootboostOrMegamaceOrHellishmetOrPolierarmOrPantasticOrAxeidicOrSmoldershoulderOrGreaterswordOrBestplateOrHarmbalestOrGambesOPOrPotencyOrTrainTacularOrEfficiencyOrSpeedminerOrSpeedlumberOrSpeedfarmingOrSpeedscienceOrSpeedexplorerOrMegaminerOrMegalumberOrMegafarmingOrMegascience {
   locked: number;
   done: number;
   allowed: number;
@@ -2297,6 +1896,7 @@ export interface OccupiedBy {
   canMoveIn?: number | null;
   slowMod?: number | null;
   slowTot?: number | null;
+  dead?: boolean | null;
 }
 export interface LootAvg {
   accumulator: number;

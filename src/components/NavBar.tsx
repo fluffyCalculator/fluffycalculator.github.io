@@ -60,7 +60,7 @@ function NavBar() {
     <div className="width-full text-center bg-thirdary shadow-md">
       <Tab
         location="/fluffy"
-        current={currentLocation === "" || currentLocation === "/fluffy"}
+        current={currentLocation === "/" || currentLocation === "/fluffy"}
       />
       <Tab location="/daily" current={currentLocation === "/daily"} />
 

@@ -66,6 +66,7 @@ export class fluffyInstance {
   spiresCompleted = [];
   instantUpdating = false;
   minutesPerRun = 14;
+  averageWorshippers = 0;
 
   //
   currentExp = 0;
@@ -145,6 +146,13 @@ export class fluffyInstance {
     if (this.graphNextIce && this.iceBonus > 1) {
       num *= this.iceBonus;
     }
+
+    if (this.universe === 2) {
+      if (this.averageWorshippers > 0) {
+        num *= this.averageWorshippers * 0.05 * 0.375 + 1;
+      }
+    }
+
     return num;
   };
 
@@ -440,6 +448,9 @@ export class fluffyInstance {
 
     this.purchasedFluffyExpBonus = gameSave.talents.fluffyExp.purchased;
 
+    this.averageWorshippers =
+      this.universe === 2 ? gameSave.jobs.Worshipper.owned : 0;
+
     this.purchasedFluffyPrestigeBonus =
       gameSave.talents.fluffyAbility.purchased;
 
@@ -508,6 +519,10 @@ export class fluffyInstance {
         break;
       case "Knowledge Level":
         this.traps.level = Number(value);
+        break;
+      case "Average Worshippers":
+        this.averageWorshippers = Number(value);
+        this.expBonus = this.getExpBonus();
         break;
       case "Minutes Per Run":
         this.minutesPerRun = Number(value);

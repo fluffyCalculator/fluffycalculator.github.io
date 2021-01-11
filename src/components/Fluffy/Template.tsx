@@ -7,7 +7,7 @@ import React, {
   useState,
 } from "react";
 import { fluffyInstance, handle_paste } from "../../calculators/fluffy";
-import { testSave1 } from "../../testsaves/one";
+import { two } from "../../testsaves/two";
 import Button from "../utils/Button";
 import InputSection from "./InputSection";
 import LevelUpTable from "./LevelUpTable";
@@ -64,10 +64,10 @@ function Template({
   const [update, setUpdate] = useState(true);
 
   useEffect(() => {
-    if (!true) {
-      instance.pasteSaveActions(testSave1);
-      setUpdate(!update);
-    }
+    // if (false) {
+    instance.pasteSaveActions(two);
+    setUpdate(!update);
+    // }
   }, []);
 
   if (instance.name === "init") {
