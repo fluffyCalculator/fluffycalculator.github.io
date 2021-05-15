@@ -33,7 +33,7 @@ function RunTimeTable({ data, second, time }: Props): ReactElement {
       <table className="w-full bg-secondary border border-solid border-prpl shadow-xl">
         <thead>
           <tr className="bg-thirdary">
-            <th className="cell">🍑</th>
+            <th className="cell">💉</th>
             <th className="cell">{`Runs to E${data.evolution}`}</th>
             {time! > 0 && (
               <th className="cell">{`Time to E${data.evolution}`}</th>

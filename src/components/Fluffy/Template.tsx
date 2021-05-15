@@ -4,10 +4,10 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState,
+  useState
 } from "react";
 import { fluffyInstance, handle_paste } from "../../calculators/fluffy";
-import { two } from "../../testsaves/two";
+import { testSave3 } from "../../testsaves/three";
 import Button from "../utils/Button";
 import InputSection from "./InputSection";
 import LevelUpTable from "./LevelUpTable";
@@ -65,7 +65,7 @@ function Template({
 
   useEffect(() => {
     if (false) {
-      instance.pasteSaveActions(two);
+      instance.pasteSaveActions(testSave3);
       setUpdate(!update);
     }
   }, []);

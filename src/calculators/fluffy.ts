@@ -1,7 +1,7 @@
 import { decompressFromBase64 } from "lz-string";
 // import { testSave1 } from "../test/testSave1.js";
 import { countDailyWeightDaily, DailyMods } from "./daily";
-import { GameObject, Portal, TrapProperties } from "./GameObject.d";
+import { AutoBattleData, GameObject, Portal, Traps } from './GameObject.d';
 import { getDailyHeliumValue, isRewardActive } from "./main";
 
 const extend = require("node.extend/lib/extend");
@@ -71,7 +71,9 @@ export class fluffyInstance {
   //
   currentExp = 0;
 
-  traps: TrapProperties; // game.playerSpire.traps.Knowledge
+  traps: Traps; // game.playerSpire.traps.Knowledge
+
+  autoBattle: AutoBattleData;
 
   daily: DailyMods; // game.global.dailyChallenge
 
@@ -151,6 +153,11 @@ export class fluffyInstance {
       if (this.averageWorshippers > 0) {
         num *= this.averageWorshippers * 0.05 * 0.375 + 1;
       }
+
+      if (this.autoBattle.oneTimers.Battlescruff){
+        num *= (1 + ((this.autoBattle.maxEnemyLevel - 1) / 50));
+      }
+
     }
 
     return num;
@@ -206,7 +213,7 @@ export class fluffyInstance {
         (Math.pow(this.getExpGrowth(), end - minimumZone) - 1) /
         (this.getExpGrowth() - 1);
       mcalc2 =
-        (this.getBaseExp() + this.portal.Curious.level * 60) *
+        (this.getBaseExp() + this.portal.Curious.level * 80) *
         (1 + this.portal.Cunning.level * 0.25) *
         this.expBonus;
     } else {
@@ -441,6 +448,8 @@ export class fluffyInstance {
       heirloomBonus: gameSave.heirlooms.Staff.FluffyExp.currentBonus,
     };
 
+    this.autoBattle = gameSave.global.autoBattleData;
+
     this.daily = extend(true, {}, gameSave.global.dailyChallenge);
     this.portal = extend(true, {}, gameSave.portal);
 
@@ -462,7 +471,7 @@ export class fluffyInstance {
       this.universe === 1 ? 1 + 0.0025 * gameSave.empowerments.Ice.level : 1;
 
     this.expBonus = this.getExpBonus();
-
+    
     this.updateDisplayData();
   };
 
