@@ -1,7 +1,7 @@
 import { decompressFromBase64 } from "lz-string";
 // import { testSave1 } from "../test/testSave1.js";
 import { countDailyWeightDaily, DailyMods } from "./daily";
-import { AutoBattleData, GameObject, Portal, Traps } from './GameObject.d';
+import { AutoBattleData, GameObject, Portal, Traps } from "./GameObject.d";
 import { getDailyHeliumValue, isRewardActive } from "./main";
 
 const extend = require("node.extend/lib/extend");
@@ -154,10 +154,9 @@ export class fluffyInstance {
         num *= this.averageWorshippers * 0.05 * 0.375 + 1;
       }
 
-      if (this.autoBattle.oneTimers.Battlescruff){
-        num *= (1 + ((this.autoBattle.maxEnemyLevel - 1) / 50));
+      if (this.autoBattle.oneTimers.Battlescruff) {
+        num *= 1 + (this.autoBattle.maxEnemyLevel - 1) / 50;
       }
-
     }
 
     return num;
@@ -471,7 +470,7 @@ export class fluffyInstance {
       this.universe === 1 ? 1 + 0.0025 * gameSave.empowerments.Ice.level : 1;
 
     this.expBonus = this.getExpBonus();
-    
+
     this.updateDisplayData();
   };
 
@@ -525,9 +524,11 @@ export class fluffyInstance {
         break;
       case "Knowledge Towers":
         this.traps.owned = Number(value);
+        this.expBonus = this.getExpBonus();
         break;
       case "Knowledge Level":
         this.traps.level = Number(value);
+        this.expBonus = this.getExpBonus();
         break;
       case "Average Worshippers":
         this.averageWorshippers = Number(value);
