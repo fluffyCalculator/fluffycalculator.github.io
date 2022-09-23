@@ -248,7 +248,7 @@ export class fluffyInstance {
 
   spireXP = (zone: number) => {
     var reward =
-      (baseExp + this.portal.Curious.level * 60) *
+      (baseExp + this.portal.Curious.level * 80) *
       Math.pow(this.getExpGrowth(), zone - this.getMinZoneForExp() - 1) *
       (1 + this.portal.Cunning.level * 0.25);
     return reward * this.expBonus * this.getExpGrowth();
