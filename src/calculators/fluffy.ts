@@ -332,13 +332,10 @@ export class fluffyInstance {
     const currentRelativeExp = this.evolution === evolution ? this.currentExp : 0;
     // prettier-ignore
     let neededExpForLevel = this.getUpgradeExp(evolution, level, currentRelativeExp);
-    
-    neededExpForLevel = neededExpForLevel - currentRelativeExp
-    
-    if (
-      this.xpFromZone(zoneLastLeveled, maxZone) >
-      neededExpForLevel
-    ) {
+
+    neededExpForLevel = neededExpForLevel - currentRelativeExp;
+
+    if (this.xpFromZone(zoneLastLeveled, maxZone) > neededExpForLevel) {
       for (var z = zone; z < maxZone; z++) {
         let collectedExp = this.xpFromZone(zoneLastLeveled, z + 1);
         if (collectedExp >= neededExpForLevel) {
