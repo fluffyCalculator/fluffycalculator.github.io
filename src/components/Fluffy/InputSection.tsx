@@ -85,7 +85,7 @@ function InputSection({ index, instance, universe, renderParent }: Props) {
     }
 
     if (type === "Fluffocus") {
-      instance.purchasedFluffyBonus = !instance.purchasedFluffyBonus;
+      instance.purchasedFluffyExpBonus = !instance.purchasedFluffyExpBonus;
 
       if (instance.instantUpdating) {
         instance.expBonus = instance.getExpBonus();
@@ -219,7 +219,7 @@ function InputSection({ index, instance, universe, renderParent }: Props) {
               <Label>
                 Fluffocus Mastery
                 <MemoTrueFalseButton
-                  colors={false}
+                  colors={true}
                   active={instance.purchasedFluffyExpBonus}
                   onClick={() => {
                     handleClick("Fluffocus");
