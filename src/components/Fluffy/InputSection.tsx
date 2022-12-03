@@ -196,7 +196,7 @@ function InputSection({ index, instance, universe, renderParent }: Props) {
               <Label>
                 Ice Enlightenment
                 <MemoTrueFalseButton
-                  colors={false}
+                  colors={true}
                   active={instance.graphNextIce}
                   onClick={() => {
                     handleClick("Ice");
