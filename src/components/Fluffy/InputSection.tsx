@@ -84,6 +84,16 @@ function InputSection({ index, instance, universe, renderParent }: Props) {
       }
     }
 
+    if (type === "Fluffocus") {
+      instance.purchasedFluffyBonus = !instance.purchasedFluffyBonus;
+
+      if (instance.instantUpdating) {
+        instance.expBonus = instance.getExpBonus();
+        instance.updateDisplayData();
+        renderParent();
+      }
+    }
+
     if (type === "Calculate") {
       instance.updateDisplayData();
       renderParent();
@@ -200,6 +210,19 @@ function InputSection({ index, instance, universe, renderParent }: Props) {
                   active={instance.graphNextIce}
                   onClick={() => {
                     handleClick("Ice");
+                  }}
+                />
+              </Label>
+            )}
+
+            {universe === 1 && (
+              <Label>
+                Fluffocus Mastery
+                <MemoTrueFalseButton
+                  colors={false}
+                  active={instance.purchasedFluffyExpBonus}
+                  onClick={() => {
+                    handleClick("Fluffocus");
                   }}
                 />
               </Label>
