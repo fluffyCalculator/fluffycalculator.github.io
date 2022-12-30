@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       colors: {
         prpl: "#A775FA",
+        grey: "#999999",
         tier1: "#DD7E6B",
         tier2: "#AFCB77",
         tier3: "#62BD87",
