@@ -102,7 +102,7 @@ function Filter() {
               className="mr-2"
               onClick={() => {
                 for (var type in filterTypes) {
-                  filterTypes[type] = !filterTypes[type];
+                  filterTypes[type] = filterTypes[type] ? 0 : 1;
                 }
 
                 setFlipAll(!flipAll);
