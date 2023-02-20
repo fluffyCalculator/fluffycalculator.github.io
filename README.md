@@ -1,5 +1,5 @@
 # Fluffy Calculator
 
-https://fluffycalculatorsa.github.io/
+https://SadAugust.github.io/
 
 Now a typescript React App. Converted from plain javascript/html.
