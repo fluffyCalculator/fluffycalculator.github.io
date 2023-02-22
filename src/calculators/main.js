@@ -774,17 +774,6 @@ export var dailyModifiers = {
 		minMaxStep: [10, 25, 1],
 		chance: 1,
 	},
-	/* 		disarmed: {
-			  equipmentList: ["Boots", "Mace", "Helmet", "Polearm", "Pants", "Battleaxe", "Shoulderguards", "Greatsword", "Breastplate", "Arbalest", "Gambeson"],
-			  description: function (str) {
-				  return "You can't use something"
-			  },
-			  getBannedEquipment(str, checkOne){
-				  if (checkOne) return (this.equipmentList.indexOf(checkOne) < str);
-			  },
-			  minMaxStep: [1, 11, 1],
-			  chance: 1
-		  } */
 };
 
 export function prettify(number) {
