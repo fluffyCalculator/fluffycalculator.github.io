@@ -533,31 +533,6 @@
                         minMaxStep: [1, 10, 1],
                         chance: 1,
                     },
-                    hemmorrhage: {
-                        description: function (e) {
-                            for (var t = this.getResources(e), n = "Every 15 seconds, your stored ", r = 1; r < t.length; r++)
-                                2 === r ? (3 === t.length ? (n += " and ") : (n += ", ")) : 3 === r && (n += ", and "), (n += t[r].charAt(0).toUpperCase() + t[r].slice(1));
-                            return (n += " is reduced by " + p(t[0]) + "%");
-                        },
-                        getResources: function (e) {
-                            var t = (e += "").length >= 4 ? parseInt(e[3], 0) : 0,
-                                n = [(t = 25 + 5 * t)];
-                            return (
-                                parseInt(e[0], 10) < 7 && n.push("food"),
-                                e.length < 2
-                                    ? (n.length < 2 && n.push("food"), n)
-                                    : (parseInt(e[1], 10) < 7 && n.push("wood"), e.length < 3 ? (n.length < 2 && n.push("wood"), n) : (parseInt(e[2], 10) < 7 && n.push("metal"), n.length < 2 && n.push("metal"), n))
-                            );
-                        },
-                        getWeight: function (e) {
-                            var t = this.getResources(e);
-                            return 0.3 * t.length * (1 + t[0] / 50);
-                        },
-                        blockU2: !0,
-                        blockU1: !0,
-                        minMaxStep: [0, 9999, 1],
-                        chance: 2,
-                    },
                     empoweredVoid: {
                         description: function (str) {
                             return "Enemies in Void Maps have +" + prettify((this.getMult(str) - 1) * 100) + "% increased Attack and Health";
@@ -795,7 +770,6 @@
                     badHealth: "H",
                     rampage: "D",
                     karma: "K",
-                    hemmorrhage: "h",
                     heirlost: "z",
                     empoweredVoid: "q",
                 };
@@ -1010,7 +984,6 @@
                     metallicThumb: !0,
                     trimpCritChanceUp: !0,
                     trimpCritChanceDown: !0,
-                    hemmorrhage: !0,
                     empoweredVoid: !0,
                     heirlost: !0,
                 },
