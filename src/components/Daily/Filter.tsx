@@ -36,6 +36,8 @@ export var filterTypes = {
   trimpCritChanceUp: true,
   trimpCritChanceDown: true,
   hemmorrhage: true,
+  empoweredVoid: true,
+  heirlost: true,
 };
 
 declare const window: any;
