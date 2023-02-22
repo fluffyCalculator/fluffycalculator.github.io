@@ -535,16 +535,16 @@
                     },
                     empoweredVoid: {
                         description: function (str) {
-                            return "Enemies in Void Maps have +" + prettify((this.getMult(str) - 1) * 100) + "% increased Attack and Health";
+                            return "Heirloom combat and resource bonuses are reduced by " + str + "%.";
                         },
                         getWeight: function (str) {
-                            return ((str / 10) + 0.5);
+                            return ((str / 10) + 0.5)
                         },
                         getMult: function (str) {
-                            return (1 + (str / 10));
+                            return ((100 - str) / 100);
                         },
                         blockU1: !0,
-                        minMaxStep: [10, 25, 1],
+                        minMaxStep: [5, 20, 1],
                         chance: 1,
                     },
                 };
