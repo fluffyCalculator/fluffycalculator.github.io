@@ -507,14 +507,14 @@
                         chance: 1,
                     },
                     heirlost: {
-                        description: function (str) {
-                            return "Heirloom combat and resource bonuses are reduced by " + str + "%.";
+                        description: function (e) {
+                            return "Heirloom combat and resource bonuses are reduced by " + e + "%.";
                         },
-                        getWeight: function (str) {
-                            return ((str / 10) + 0.5)
+                        getWeight: function (e) {
+                            return ((e / 10) + 0.5)
                         },
-                        getMult: function (str) {
-                            return ((100 - str) / 100);
+                        getMult: function (e) {
+                            return ((100 - e) / 100);
                         },
                         blockU1: !0,
                         minMaxStep: [5, 20, 1],
@@ -534,14 +534,14 @@
                         chance: 1,
                     },
                     empoweredVoid: {
-                        description: function (str) {
-                            return "Enemies in Void Maps have +" + prettify((this.getMult(str) - 1) * 100) + "% increased Attack and Health";
+                        description: function (e) {
+                            return "Enemies in Void Maps have +" + prettify((this.getMult(e) - 1) * 100) + "% increased Attack and Health";
                         },
-                        getWeight: function (str) {
-                            return ((str / 10) + 0.5);
+                        getWeight: function (e) {
+                            return ((e / 10) + 0.5);
                         },
-                        getMult: function (str) {
-                            return (1 + (str / 10));
+                        getMult: function (e) {
+                            return (1 + (e / 10));
                         },
                         blockU1: !0,
                         minMaxStep: [10, 25, 1],
