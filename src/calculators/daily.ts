@@ -16,6 +16,8 @@ var mods = {
 	rampage: "D",
 	karma: "K",
 	hemmorrhage: "h",
+	empoweredVoid: "h",
+	heirlost: "h",
 };
 
 declare const window: any;
