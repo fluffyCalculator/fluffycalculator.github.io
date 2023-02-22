@@ -535,7 +535,7 @@
                     },
                     empoweredVoid: {
                         description: function (e) {
-                            return "Enemies in Void Maps have +" + prettify((this.getMult(e) - 1) * 100) + "% increased Attack and Health";
+                            return "Enemies in Void Maps have +" + p((this.getMult(e) - 1) * 100) + "% increased Attack and Health";
                         },
                         getWeight: function (e) {
                             return ((e / 10) + 0.5);
