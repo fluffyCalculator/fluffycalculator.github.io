@@ -227,6 +227,17 @@ function InputSection({ index, instance, universe, renderParent }: Props) {
                 />
               </Label>
             )}
+            
+            {universe === 1 && (
+              <Label>
+                Frigid Completions
+                <Input
+                  variant="fluffy"
+                  max={15}
+                  defaultValue={instance?.frigidCompletions || 0}
+                  />
+              </Label>
+            )}
 
             {universe === 2 && (
               <Label>
