@@ -67,7 +67,7 @@ export class fluffyInstance {
   instantUpdating = false;
   minutesPerRun = 14;
   averageWorshippers = 0;
-
+  frigidCompletions = 0;
   //
   currentExp = 0;
 
@@ -147,6 +147,9 @@ export class fluffyInstance {
     }
     if (this.graphNextIce && this.iceBonus > 1) {
       num *= this.iceBonus;
+    }
+    if (this.frigidCompletions > 0) {
+      num *= 1 + (((this.frigidCompletions / 2) * (this.frigidCompletions + 1)) / 40);
     }
 
     if (this.universe === 2) {
@@ -468,6 +471,8 @@ export class fluffyInstance {
 
     this.iceBonus =
       this.universe === 1 ? 1 + 0.0025 * gameSave.empowerments.Ice.level : 1;
+    
+    this.frigidCompletions = gameSave.global.frigidCompletions;
 
     this.expBonus = this.getExpBonus();
 
@@ -528,6 +533,10 @@ export class fluffyInstance {
         break;
       case "Knowledge Level":
         this.traps.level = Number(value);
+        this.expBonus = this.getExpBonus();
+        break;
+      case "Frigid Completions":
+        this.frigidCompletions = Number(value);
         this.expBonus = this.getExpBonus();
         break;
       case "Average Worshippers":
