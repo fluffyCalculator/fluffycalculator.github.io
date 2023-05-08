@@ -6,36 +6,36 @@ import Label from "../utils/Label";
 import { DailyContext } from "./Context";
 
 export var filterTypes = {
-  minDamage: true,
-  maxDamage: true,
-  plague: true,
-  weakness: true,
-  large: true,
-  dedication: true,
-  famine: true,
-  badStrength: true,
-  badHealth: true,
-  badMapStrength: true,
-  badMapHealth: true,
-  crits: true,
-  bogged: true,
-  dysfunctional: true,
-  oddTrimpNerf: true,
-  evenTrimpBuff: true,
-  karma: true,
-  toxic: true,
-  bloodthirst: true,
-  explosive: true,
-  slippery: true,
-  rampage: true,
-  mutimps: true,
-  empower: true,
-  pressure: true,
-  mirrored: true,
-  metallicThumb: true,
-  trimpCritChanceUp: true,
-  trimpCritChanceDown: true,
-  hemmorrhage: true,
+  minDamage: 0,
+  maxDamage: 0,
+  plague: 0,
+  weakness: 0,
+  large: 0,
+  dedication: 0,
+  famine: 0,
+  badStrength: 0,
+  badHealth: 0,
+  badMapStrength: 0,
+  badMapHealth: 0,
+  crits: 0,
+  bogged: 0,
+  dysfunctional: 0,
+  oddTrimpNerf: 0,
+  evenTrimpBuff: 0,
+  karma: 0,
+  toxic: 0,
+  bloodthirst: 0,
+  explosive: 0,
+  slippery: 0,
+  rampage: 0,
+  mutimps: 0,
+  empower: 0,
+  pressure: 0,
+  mirrored: 0,
+  metallicThumb: 0,
+  trimpCritChanceUp: 0,
+  trimpCritChanceDown: 0,
+  hemmorrhage: 0,
 };
 
 declare const window: any;
@@ -50,11 +50,11 @@ function FilterBox({ type }: { type: string }) {
     <>
       <div
         className={clsx(
-          filterTypes[type] ? "bg-tier3" : "bg-tier1",
+          filterTypes[type] < 0 ? "bg-tier3" : filterTypes[type] ? "bg-tier1" : "bg-grey",
           "m-0.5 p-1 w-min text-black text-xxs shadow cursor-pointer select-none sm:text-xs md:text-sm"
         )}
         onClick={() => {
-          filterTypes[type] = !filterTypes[type];
+          filterTypes[type] = ((filterTypes[type] + 2) % 3) - 1;
 
           updateDailiesFiltered();
 
@@ -102,7 +102,7 @@ function Filter() {
               className="mr-2"
               onClick={() => {
                 for (var type in filterTypes) {
-                  filterTypes[type] = !filterTypes[type];
+                  filterTypes[type] = filterTypes[type] ? 0 : 1;
                 }
 
                 setFlipAll(!flipAll);

@@ -23,15 +23,19 @@ const DailyProvider = ({ children }) => {
   };
 
   const updateDailiesFiltered = () => {
-    const goodMods = Object.keys(filterTypes).filter((x) => filterTypes[x]);
+    const goodMods = Object.keys(filterTypes).filter((x) => filterTypes[x] > 0);
+    const badMods = Object.keys(filterTypes).filter((x) => filterTypes[x] < 0);
     for (var x = 0; x < dailies.length; x++) {
       if (Object.keys(dailies[x]).length === 0) continue;
 
-      let matched = 0;
+      let matched = badMods.length;
 
       Object.keys(dailies[x].mods).forEach((y, i) => {
         if (goodMods.indexOf(y) !== -1) {
           matched += 1;
+        }
+        if (badMods.indexOf(y) !== -1) {
+          matched -= 1;
         }
       });
 
