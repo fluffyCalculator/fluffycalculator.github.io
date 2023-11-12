@@ -35,7 +35,9 @@ export var filterTypes = {
   metallicThumb: true,
   trimpCritChanceUp: true,
   trimpCritChanceDown: true,
-  hemmorrhage: true,
+  heirlost: true,
+  empoweredVoid: true,
+  /* hemmorrhage: true, */
 };
 
 declare const window: any;
@@ -90,7 +92,7 @@ function Filter() {
             {Object.keys(filterTypes)
               .filter(
                 (type) =>
-                  (type === "hemmorrhage" && window.daily_universe === 1) ===
+                  (["heirlost", "empoweredVoid", "hemmorrhage"].indexOf(type) !== -1 && window.daily_universe === 1) ===
                   false
               )
               .map((type, idx) => {

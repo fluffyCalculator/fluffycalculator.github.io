@@ -1,7 +1,7 @@
 import { decompressFromBase64 } from "lz-string";
 // import { testSave1 } from "../test/testSave1.js";
 import { countDailyWeightDaily, DailyMods } from "./daily";
-import { AutoBattleData, GameObject, Portal, Traps } from "./GameObject.d";
+import { AutoBattleData, mutationData, GameObject, Portal, Traps } from "./GameObject.d";
 import { getDailyHeliumValue, isRewardActive } from "./main";
 
 const extend = require("node.extend/lib/extend");
@@ -74,6 +74,7 @@ export class fluffyInstance {
   traps: Traps; // game.playerSpire.traps.Knowledge
 
   autoBattle: AutoBattleData;
+  mutations: mutationData;
 
   daily: DailyMods; // game.global.dailyChallenge
 
@@ -111,7 +112,7 @@ export class fluffyInstance {
   getLevel = (evolution: number, exp: number) => {
     return Math.floor(
       Math.log((exp / this.getFirstLevel(evolution)) * (growth - 1) + 1) /
-        Math.log(growth)
+      Math.log(growth)
     );
   };
 
@@ -123,8 +124,8 @@ export class fluffyInstance {
     if (level === 10) return 0;
     return Math.floor(
       this.firstLevel *
-        Math.pow(prestigeExpModifier, evolution) *
-        ((Math.pow(growth, level) - 1) / (growth - 1))
+      Math.pow(prestigeExpModifier, evolution) *
+      ((Math.pow(growth, level) - 1) / (growth - 1))
     );
   };
 
@@ -160,6 +161,10 @@ export class fluffyInstance {
       if (this.autoBattle.oneTimers.Battlescruff) {
         num *= 1 + (this.autoBattle.maxEnemyLevel - 1) / 50;
       }
+
+      if (this.mutations.Scruffy) {
+        num *= 1.3;
+      }
     }
 
     return num;
@@ -171,9 +176,9 @@ export class fluffyInstance {
     }
     return Math.floor(
       this.firstLevel *
-        Math.pow(prestigeExpModifier, evolution) *
-        ((Math.pow(growth, level + 1) - 1) / (growth - 1)) -
-        this.removeExp(evolution, level)
+      Math.pow(prestigeExpModifier, evolution) *
+      ((Math.pow(growth, level + 1) - 1) / (growth - 1)) -
+      this.removeExp(evolution, level)
     );
   };
 
@@ -425,8 +430,8 @@ export class fluffyInstance {
       bonesToLevel:
         this.universe === 1
           ? Math.ceil(
-              (neededExpForLevel - this.currentExp) / this.save.bestFluffyExp
-            ) * 100
+            (neededExpForLevel - this.currentExp) / this.save.bestFluffyExp
+          ) * 100
           : 0,
       XPhr:
         this.minutesPerRun > 0
@@ -451,6 +456,7 @@ export class fluffyInstance {
     };
 
     this.autoBattle = gameSave.global.autoBattleData;
+    this.mutations = gameSave.global.u2MutationData;
 
     this.daily = extend(true, {}, gameSave.global.dailyChallenge);
     this.portal = extend(true, {}, gameSave.portal);
@@ -471,7 +477,7 @@ export class fluffyInstance {
 
     this.iceBonus =
       this.universe === 1 ? 1 + 0.0025 * gameSave.empowerments.Ice.level : 1;
-    
+
     this.frigidCompletions = gameSave.global.frigidCompletions;
 
     this.expBonus = this.getExpBonus();
@@ -584,7 +590,7 @@ const getDailyBonus = (
         countDailyWeightDaily(daily),
         isRewardActive("dailies", universe, evolution, level, boughtEarly)
       ) /
-        100 +
+      100 +
       1
     );
   } else {

@@ -685,6 +685,20 @@ export var dailyModifiers = {
     minMaxStep: [1, 100, 1],
     chance: 1,
   },
+  heirlost: {
+    description: function (str) {
+      return "Heirloom combat and resource bonuses are reduced by " + str + "%.";
+    },
+    getWeight: function (str) {
+      return ((str / 10) + 0.5)
+    },
+    getMult: function (str) {
+      return ((100 - str) / 100);
+    },
+    minMaxStep: [5, 20, 1],
+    chance: 1,
+    blockU1: true,
+  },
   metallicThumb: {
     description: function (str) {
       return (
@@ -700,7 +714,21 @@ export var dailyModifiers = {
     minMaxStep: [1, 10, 1],
     chance: 1,
   },
-  hemmorrhage: {
+  empoweredVoid: {
+    description: function (str) {
+      return "Enemies in Void Maps have +" + prettify((this.getMult(str) - 1) * 100) + "% increased Attack and Health";
+    },
+    getWeight: function (str) {
+      return ((str / 10) + 0.5);
+    },
+    getMult: function (str) {
+      return (1 + (str / 10));
+    },
+    minMaxStep: [10, 25, 1],
+    chance: 1,
+    blockU1: true,
+  },
+  /* hemmorrhage: {
     description: function (str) {
       var res = this.getResources(str);
       var text = "Every 15 seconds, your stored ";
@@ -743,18 +771,18 @@ export var dailyModifiers = {
     blockU1: true,
     minMaxStep: [0, 9999, 1],
     chance: 2,
-  },
+  }, */
   /* 		disarmed: {
-			equipmentList: ["Boots", "Mace", "Helmet", "Polearm", "Pants", "Battleaxe", "Shoulderguards", "Greatsword", "Breastplate", "Arbalest", "Gambeson"],
-			description: function (str) {
-				return "You can't use something"
-			},
-			getBannedEquipment(str, checkOne){
-				if (checkOne) return (this.equipmentList.indexOf(checkOne) < str);
-			},
-			minMaxStep: [1, 11, 1],
-			chance: 1
-		} */
+      equipmentList: ["Boots", "Mace", "Helmet", "Polearm", "Pants", "Battleaxe", "Shoulderguards", "Greatsword", "Breastplate", "Arbalest", "Gambeson"],
+      description: function (str) {
+        return "You can't use something"
+      },
+      getBannedEquipment(str, checkOne){
+        if (checkOne) return (this.equipmentList.indexOf(checkOne) < str);
+      },
+      minMaxStep: [1, 11, 1],
+      chance: 1
+    } */
 };
 
 export function prettify(number) {
