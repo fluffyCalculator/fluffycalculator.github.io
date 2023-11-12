@@ -1,0 +1,20 @@
+{  
+  "files": {
+    "main.css": "/fluffycalculatorz.github.io/static/css/main.cb1d6d75.chunk.css",
+    "main.js": "/fluffycalculatorz.github.io/static/js/main.df896865.chunk.js",
+    "main.js.map": "/fluffycalculatorz.github.io/static/js/main.df896865.chunk.js.map",
+    "runtime-main.js": "/fluffycalculatorz.github.io/static/js/runtime-main.23f262d1.js",
+    "runtime-main.js.map": "/fluffycalculatorz.github.io/static/js/runtime-main.23f262d1.js.map",
+    "static/js/2.76d9f82e.chunk.js": "/fluffycalculatorz.github.io/static/js/2.76d9f82e.chunk.js",
+    "static/js/2.76d9f82e.chunk.js.map": "/fluffycalculatorz.github.io/static/js/2.76d9f82e.chunk.js.map",
+    "index.html": "/fluffycalculatorz.github.io/index.html",
+    "static/css/main.cb1d6d75.chunk.css.map": "/fluffycalculatorz.github.io/static/css/main.cb1d6d75.chunk.css.map",
+    "static/js/2.76d9f82e.chunk.js.LICENSE.txt": "/fluffycalculatorz.github.io/static/js/2.76d9f82e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "/fluffycalculatorz.github.iostatic/js/runtime-main.23f262d1.js",
+    "/fluffycalculatorz.github.iostatic/js/2.76d9f82e.chunk.js",
+    "/fluffycalculatorz.github.iostatic/css/main.cb1d6d75.chunk.css",
+    "/fluffycalculatorz.github.iostatic/js/main.df896865.chunk.js"
+  ]
+}
