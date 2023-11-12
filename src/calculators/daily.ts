@@ -15,7 +15,9 @@ var mods = {
   badHealth: "H",
   rampage: "D",
   karma: "K",
-  hemmorrhage: "h",
+  /* hemmorrhage: "h", */
+  empoweredVoid: "eV",
+  heirlost: "hl",
 };
 
 declare const window: any;
@@ -150,7 +152,9 @@ export type DailyMods = {
   badHealth?: object;
   rampage?: object;
   karma?: object;
-  hemmorrhage?: object;
+  /* hemmorrhage?: object; */
+  heirlost?: object;
+  empoweredVoid?: object;
 };
 
 function getDailyChallenge(add: number) {
@@ -206,10 +210,10 @@ function getDailyChallenge(add: number) {
           0,
           Math.floor(
             (modObj.minMaxStep[1] + modObj.minMaxStep[2]) *
-              (1 / modObj.minMaxStep[2])
+            (1 / modObj.minMaxStep[2])
           ) - modObj.minMaxStep[0]
         ) *
-          modObj.minMaxStep[2];
+        modObj.minMaxStep[2];
       var modWeight = modObj.getWeight(str);
       var modSize = modWeight < 0.85 ? 0 : modWeight < 1.85 ? 1 : 2;
       if (modWeight + currentWeight > weightTarget + 1) continue;

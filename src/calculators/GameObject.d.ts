@@ -1,11 +1,11 @@
 ﻿export interface GameObject {
-  [x: string]: any 
+  [x: string]: any
 }
 
-export interface Traps { 
-    owned: number;
-    level: number;
-    locked: boolean;
+export interface Traps {
+  owned: number;
+  level: number;
+  locked: boolean;
 }
 
 export interface AutoBattleData {
@@ -22,6 +22,13 @@ export interface AutoBattleData {
   oneTimers: any;
   settings: any;
 }
+
+export interface mutationData {
+  Scruffy: boolean;
+  NovaScruff: boolean;
+  Poppin: boolean;
+}
+
 export interface Portal {
   Looting_II: LootingIIOrCarpentryIIOrMotivationIIOrPowerIIOrToughnessII;
   Carpentry_II: LootingIIOrCarpentryIIOrMotivationIIOrPowerIIOrToughnessII;
