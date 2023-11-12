@@ -8,17 +8,29 @@ on:
     branches: [ "main" ]
     
 jobs:
-  build:
+  deploy:
+
+    env:
+      CI: false
 
     runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v3
+    
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: 16
         cache: 'yarn'
+
     - run: yarn install --immutable
+    
     - run: yarn predeploy
-    - run: yarn deploy
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build

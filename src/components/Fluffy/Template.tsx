@@ -1,13 +1,7 @@
 import clsx from "clsx";
-import React, {
-  MutableRefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState
-} from "react";
+import React, { MutableRefObject, useCallback, useRef, useState } from "react";
 import { fluffyInstance, handle_paste } from "../../calculators/fluffy";
-import { testSave3 } from "../../testsaves/three";
+// import { testSave3 } from "../../testsaves/three";
 import Button from "../utils/Button";
 import InputSection from "./InputSection";
 import LevelUpTable from "./LevelUpTable";
@@ -63,12 +57,12 @@ function Template({
 }) {
   const [update, setUpdate] = useState(true);
 
-  useEffect(() => {
-    if (false) {
-      instance.pasteSaveActions(testSave3);
-      setUpdate(!update);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (false) {
+  //     instance.pasteSaveActions(testSave3);
+  //     setUpdate(!update);
+  //   }
+  // }, []);
 
   if (instance.name === "init") {
     instance.getLocalStorage();
