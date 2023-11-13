@@ -58,7 +58,6 @@ export function makeDaily(times): Partial<DailyType>[] {
       returnable.push({});
       continue;
     }
-    // console.log(dailyObj);
     returnable.push({
       value: dailyValue,
       date: getPrettyTimeString(x),
@@ -169,6 +168,7 @@ function getDailyChallenge(add: number) {
   var dailyObject: Partial<DailyMods> = {};
   for (var item in dailyModifiers) {
     if (window.daily_universe === 1 && dailyModifiers[item].blockU1) continue;
+    if (window.daily_universe === 2 && dailyModifiers[item].blockU2) continue;
     modifierList.push(item);
     totalChance += dailyModifiers[item].chance;
   }

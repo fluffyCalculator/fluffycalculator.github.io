@@ -684,6 +684,7 @@ export var dailyModifiers = {
     },
     minMaxStep: [1, 100, 1],
     chance: 1,
+    blockU2: true,
   },
   heirlost: {
     description: function (str) {

@@ -95,6 +95,11 @@ function Filter() {
                   (["heirlost", "empoweredVoid", "hemmorrhage"].indexOf(type) !== -1 && window.daily_universe === 1) ===
                   false
               )
+              .filter(
+                (type) =>
+                  (["mirrored"].indexOf(type) !== -1 && window.daily_universe === 2) ===
+                  false
+              )
               .map((type, idx) => {
                 return <FilterBox key={idx} type={type} />;
               })}
