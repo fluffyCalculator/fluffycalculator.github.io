@@ -149,7 +149,7 @@ export class fluffyInstance {
     if (this.graphNextIce && this.iceBonus > 1) {
       num *= this.iceBonus;
     }
-    if (this.frigidCompletions > 0) {
+    if (this.universe === 1 && this.frigidCompletions > 0) {
       num *= 1 + (((this.frigidCompletions / 2) * (this.frigidCompletions + 1)) / 40);
     }
 
@@ -250,7 +250,9 @@ export class fluffyInstance {
         mcalc1 * mcalc2 + addSpireBonus - this.xpFromZone(minimumZone, start)
       );
     } else {
-      return mcalc1 * mcalc2 + addSpireBonus;
+      let calc = mcalc1 * mcalc2 + addSpireBonus;
+      if (this.universe === 2) calc -= mcalc2;
+      return calc;
     }
   };
 
